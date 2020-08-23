@@ -1,0 +1,45 @@
+import { GDTSymbolType } from "../../types/symbol";
+import { getSymbolAPI } from "../../api/api";
+
+export enum SymbolActionsEnum {
+	FETCH_SYMBOL_BEGIN = "FETCH_SYMBOL_BEGIN",
+	FETCH_SYMBOL_SUCCESS = "FETCH_SYMBOL_SUCCESS",
+	FETCH_SYMBOL_FAIL = "FETCH_SYMBOL_FAIL",
+	UPDATE_SYMBOL = "UPDATE_SYMBOL",
+	CLEAR_SYMBOL = "CLEAR_SYMBOL",
+}
+
+export const fetchSymbolBegin = () => ({
+	type: SymbolActionsEnum.FETCH_SYMBOL_BEGIN,
+});
+
+export const fetchSymbolSuccess = (symbol: GDTSymbolType) => ({
+	type: SymbolActionsEnum.FETCH_SYMBOL_SUCCESS,
+	symbol,
+});
+
+export const fetchSymbolFailure = () => ({
+	type: SymbolActionsEnum.FETCH_SYMBOL_FAIL,
+});
+
+export const updateSymbol = (symbol: any) => ({
+	type: SymbolActionsEnum.UPDATE_SYMBOL,
+	symbol,
+});
+
+export const clearSymbol = () => ({
+	type: SymbolActionsEnum.CLEAR_SYMBOL,
+});
+
+export const fetchSymbol = (symbolId: string) => {
+	return async (dispatch: any) => {
+		dispatch(fetchSymbolBegin());
+
+		try {
+			const data = await getSymbolAPI(symbolId);
+			dispatch(fetchSymbolSuccess(data));
+		} catch (error) {
+			dispatch(fetchSymbolFailure());
+		}
+	};
+};

@@ -1,0 +1,22 @@
+.header {
+	width: 100%;
+	height: 200px;
+	background-color: rgba(9, 98, 234, 0.8);
+	padding: 20px 40px;
+}
+.header-logoContainer {
+	display: inline-flex;
+	align-items: center;
+	text-decoration: none;
+	outline: none;
+}
+.header-image {
+	display: block;
+	margin-right: 10px;
+}
+.header-brandName {
+	font-size: 25px;
+	font-weight: 300;
+	color: #fff;
+	text-decoration: none;
+}

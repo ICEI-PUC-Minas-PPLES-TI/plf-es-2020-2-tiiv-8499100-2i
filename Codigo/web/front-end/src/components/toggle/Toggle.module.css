@@ -1,0 +1,39 @@
+.toggle-label {
+	display: flex;
+	align-items: center;
+}
+.toggle-input {
+	display: none;
+}
+.toggle-icon {
+	position: relative;
+	width: 60px;
+	height: 30px;
+	margin-right: 10px;
+}
+.toggle-icon-background {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 20px;
+	width: 100%;
+	background-color: #f5f5f5;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+	transition: background-color 0.2s ease-out;
+}
+.toggle-icon-handle {
+	position: absolute;
+	width: 20px;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: #1e71bf;
+	box-shadow: -3px 3px 6px rgba(0, 0, 0, 0.15);
+	transition: transform 0.2s ease-out;
+}
+.toggle-icon.-checked .toggle-icon-background {
+	background-color: #3a81ee;
+}
+.toggle-icon.-checked .toggle-icon-handle {
+	transform: translateX(40px);
+}

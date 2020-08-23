@@ -1,0 +1,29 @@
+.imageField {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 6px 8px rgba(0, 0, 0, 0.16);
+	padding: 10px;
+}
+.imageField-label {
+	display: inline-block;
+	font-weight: bold;
+	text-align: center;
+}
+.imageField-input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+.imageField-img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}

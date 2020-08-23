@@ -1,0 +1,104 @@
+{
+    "error_messages": {
+        "connection": "Verifique sua conexão e tente novamente!",
+        "request_error": "Não foi possível concluir sua chamada! Tente novamente mais tarde."
+    },
+    "commons": {
+        "continue": "Continuar"
+    },
+    "opening_screen": {
+        "btn_employee": "ENTRAR COMO FUNCIONÁRIO",
+        "btn_company": "USAR NA MINHA EMPRESA",
+        "btn_company_sub": "Experimente grátis por 14 dias"
+    },
+    "register_company": {
+        "start_screen": {
+            "title": "Para sua empresa",
+            "try": "Experimente por",
+            "days": "14 dias grátis",
+            "register": "Cadastro rápido, sem dados de cobrança",
+            "reduction": "Redução de custos ",
+            "prevent": "Evite problemas trabalhistas ",
+            "security": "Mais segurança"
+        },
+        "steps": "passos",
+        "name": {
+            "what": "Qual o seu",
+            "name": "nome completo",
+            "confirm": "CONFIRMAR NOME"
+        },
+        "email": {
+            "what": "qual o melhor",
+            "email": "email para cadastro",
+            "confirm": "CONFIRMAR EMAIL"
+        },
+        "pass": {
+            "what": "Agora uma",
+            "password": "senha para o cadastro",
+            "confirm": "CONFIRMAR SENHA"
+        },
+        "phone": {
+            "what": "Qual o melhor",
+            "phone": "telefone para contato",
+            "confirm": "CONFIRMAR TELEFONE"
+        },
+        "company": {
+            "what": "Qual o",
+            "name": "nome da sua empresa",
+            "confirm": "CONFIRMAR NOME DA EMPRESA"
+        },
+        "employees": {
+            "what": "Quantos",
+            "name": "empregados",
+            "confirm": "CONFIRMAR EMPREGADOS",
+            "have": "possui"
+        },
+        "confirmation": {
+            "success_start": "Sua conta foi",
+            "success_end": "criada",
+            "information": "Não se preocupe, enviamos os dados por email",
+            "employer_code": "Código da empresa",
+            "employer_pin": "Seu PIN de acesso",
+            "action": "Já quero bater meu primeiro ponto"
+        }
+    },
+    "pin_screen": {
+        "company": "Você trabalha em" ,
+        "pin": "Digite seu PIN de acesso"
+    },
+    "start_employer_code_screen": {
+        "code": "Código do\nempregador",
+        "question": "Você já tem o código do empregador?",
+        "info": "É o código gerado automaticamente pelo Tangerino para a empresa que você trabalha.",
+        "no_code": "Ainda não tenho o código",
+        "button": "INSERIR CÓDIGO"
+    },
+    "insert_employer_code_screen": {
+        "what": "Qual o seu ",
+        "code": "código do empregador",
+        "error_message": "Este código do empregador não existe \nVerifique se digitou corretamente."
+    },
+    "menu": {
+        "notifications": "Notificações",
+        "registered_punches": "Pontos registrados",
+        "adjustment_requests": "Solicitações de ajustes",
+        "messages": "Mensagens",
+        "activities": "Atividades",
+        "faq": "Dúvidas frequentes",
+        "settings": "Configurações",
+        "log_out": "Sair"
+    },
+    "home_screen": {
+        "hello": "Olá",
+        "location": "Você está próximo a"
+    },
+    "punch": {
+        "register_punch": "REGISTRAR PONTO",
+        "success": "Ponto registrado com sucesso.",
+        "offline": "Ponto registrado em modo offline",
+        "view_receipt": "VER COMPROVANTE"
+    },
+    "camera": {
+        "user_action": "Posicione seu rosto em frente a\\ncâmera e tire uma foto"
+    }
+}

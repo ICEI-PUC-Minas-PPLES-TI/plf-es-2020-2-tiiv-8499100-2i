@@ -6,6 +6,7 @@ import Card from "../../components/card/Card";
 import Spacer from "../../layout/spacer/Spacer";
 
 import * as classes from "./HomeContainer.module.css";
+import Grid from "../../layout/grid/Grid";
 
 const HomeContainer = (props: RouteComponentProps) => {
 	const redirectToGeneralStats = () => {
@@ -46,26 +47,26 @@ const HomeContainer = (props: RouteComponentProps) => {
 		<>
 			<Title>Estatísticas de Uso</Title>
 			<Spacer vertical={40} />
-			<div className={classes["home-cards"]}>
+			<Grid>
 				<Card onClick={redirectToGeneralStats}>
 					<strong>Gerais</strong>
 				</Card>
-			</div>
+			</Grid>
 			<Spacer vertical={40} />
 			<Title>Posts</Title>
 			<Spacer vertical={40} />
-			<div className={classes["home-cards"]}>
+			<Grid>
 				<Card onClick={redirectToPosts}>
 					<strong>Posts</strong>
 				</Card>
 				<Card onClick={redirectToAuthors}>
 					<strong>Autores</strong>
 				</Card>
-			</div>
+			</Grid>
 			<Spacer vertical={40} />
 			<Title>Símbolos</Title>
 			<Spacer vertical={40} />
-			<div className={classes["home-cards"]}>
+			<Grid>
 				<Card onClick={redirectToSymbols}>
 					<strong>Símbolos</strong>
 				</Card>
@@ -75,11 +76,11 @@ const HomeContainer = (props: RouteComponentProps) => {
 				<Card onClick={redirectToSymbolSubcategories}>
 					<strong>Subcategorias de Símbolos</strong>
 				</Card>
-			</div>
+			</Grid>
 			<Spacer vertical={40} />
 			<Title>Vídeos</Title>
 			<Spacer vertical={40} />
-			<div className={classes["home-cards"]}>
+			<Grid>
 				<Card onClick={redirectToVideos}>
 					<strong>Vídeos</strong>
 				</Card>
@@ -89,23 +90,23 @@ const HomeContainer = (props: RouteComponentProps) => {
 				<Card onClick={redirectToVideoSubcategories}>
 					<strong>Subcategorias de Vídeos</strong>
 				</Card>
-			</div>
+			</Grid>
 			<Spacer vertical={40} />
 			<Title>Fóruns</Title>
 			<Spacer vertical={40} />
-			<div className={classes["home-cards"]}>
+			<Grid>
 				<Card onClick={redirectToForums}>
 					<strong>Fóruns</strong>
 				</Card>
-			</div>
+			</Grid>
 			<Spacer vertical={40} />
 			<Title>Anúncios</Title>
 			<Spacer vertical={40} />
-			<div className={classes["home-cards"]}>
+			<Grid>
 				<Card onClick={redirectToAd}>
 					<strong>Anúncios</strong>
 				</Card>
-			</div>
+			</Grid>
 			<Spacer vertical={40} />
 		</>
 	);

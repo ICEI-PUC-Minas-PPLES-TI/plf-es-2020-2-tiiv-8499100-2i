@@ -25,8 +25,7 @@ const CategoryCard = (props: PropsType) => (
 				label="editar"
 				size="small"
 				buttonAttrs={{
-					onClick: () =>
-						props.editCategory(props.category[props.idSelector]),
+					onClick: () => props.editCategory(props.category[props.idSelector]),
 				}}
 			/>
 			<Spacer horizontal={20} />
@@ -34,8 +33,7 @@ const CategoryCard = (props: PropsType) => (
 				label="excluir"
 				size="small"
 				buttonAttrs={{
-					onClick: () =>
-						props.deleteCategory(props.category[props.idSelector]),
+					onClick: () => props.deleteCategory(props.category[props.idSelector]),
 				}}
 			/>
 		</Row>

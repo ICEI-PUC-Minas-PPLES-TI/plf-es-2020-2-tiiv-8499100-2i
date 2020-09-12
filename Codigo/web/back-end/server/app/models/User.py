@@ -1,6 +1,6 @@
 from server.app.dao.genericDao import GenericDao
 from server.app.models.EnumClass import EnumClass
-from server.app.service.firebaseauth import signUp
+from server.app.services.firebaseauth import signUp
 
 user_dao = GenericDao()
 

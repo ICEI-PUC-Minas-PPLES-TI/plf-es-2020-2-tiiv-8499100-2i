@@ -5,6 +5,7 @@ from server.app.middlewares.security import Security
 
 from server.app.controllers.ad import ad
 from server.app.controllers.post import post
+from server.app.controllers.forum_controller import forum
 from server.app.controllers.user import user
 from server.app.controllers.video import video
 from server.app.controllers.author import author
@@ -23,6 +24,7 @@ app.config.from_pyfile("credentials/config.py")
 app.wsgi_app = app.wsgi_app
 
 app.register_blueprint(post)
+app.register_blueprint(forum)
 app.register_blueprint(author)
 app.register_blueprint(symbol)
 app.register_blueprint(symbol_category)

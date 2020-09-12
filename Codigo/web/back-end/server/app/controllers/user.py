@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from server.app.models.User import User
-from server.app.service.firebaseauth import login
+from server.app.services.firebaseauth import login
 
 user = Blueprint('user', __name__)
 

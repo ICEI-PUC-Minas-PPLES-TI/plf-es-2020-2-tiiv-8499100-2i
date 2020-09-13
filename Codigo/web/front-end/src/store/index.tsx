@@ -20,8 +20,7 @@ import { videoSubcategory } from "./videoSubcategory/reducer";
 import { videoSubcategories } from "./videoSubcategories/reducer";
 import { ad } from "./ad/reducer";
 import { ads } from "./ads/reducer";
-import { forums } from "./forums/reducer";
-import { forumPosts } from "./forumPosts/reducer";
+import { forum } from "./forum/reducer";
 
 const reducers = combineReducers({
 	post,
@@ -42,8 +41,7 @@ const reducers = combineReducers({
 	videoSubcategories,
 	ad,
 	ads,
-	forums,
-	forumPosts,
+	forum,
 });
 
 export const store = createStore(

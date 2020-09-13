@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Title from "../../components/title/Title";
 import Spacer from "../../layout/spacer/Spacer";
 import Spinner from "../../components/spinner/Spinner";
 import ForumCard from "../../components/cards/forum-card/ForumCard";
 import Grid from "../../layout/grid/Grid";
 import { RouterProps } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchForums } from "../../store/forum/actions";
+import { ForumType } from "../../types/forum";
 
 const ViewForumContainer = (props: RouterProps) => {
-	const status: string = "success";
-	const forums = [
-		{
-			creator: "Lucas A. Gusmão",
-			dateCreated: "01/09/2020",
-			lastUpdate: "02/09/2020",
-			responseCount: 8,
-		},
-	];
-	const forumsEls = forums.map((f, index) => (
-		<ForumCard key={index} onClick={() => props.history.push("/forum/aaa")} />
+	const dispatchHook = useDispatch();
+	const { forums, status } = useSelector((state: any) => state.forum);
+
+	useEffect(() => {
+		dispatchHook(fetchForums());
+	}, [dispatchHook]);
+
+	const forumsEls = forums.map((f: ForumType) => (
+		<ForumCard
+			key={f.forumId}
+			forum={f}
+			onClick={() => props.history.push(`/forum/${f.forumId}`)}
+		/>
 	));
 
 	return (

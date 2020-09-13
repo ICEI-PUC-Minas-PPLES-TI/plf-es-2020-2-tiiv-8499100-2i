@@ -5,14 +5,17 @@ import Row from "../../../layout/row/Row";
 import * as classes from "./ForumCard.module.css";
 import Spacer from "../../../layout/spacer/Spacer";
 
-type PropsType = any;
+type PropsType = {
+	onClick: () => void;
+	forum: any;
+};
 
 const ForumCard = (props: PropsType) => {
 	return (
 		<Card padding={15} onClick={props.onClick}>
 			<Row>
 				<strong className={classes["forumCard-title"]}>
-					Dúvidas sobre GD&T
+					{props.forum.title}
 				</strong>
 			</Row>
 			<Spacer vertical={5} />

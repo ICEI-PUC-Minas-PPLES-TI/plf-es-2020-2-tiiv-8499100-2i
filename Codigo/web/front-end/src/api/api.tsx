@@ -15,6 +15,7 @@ import {
 } from "../types/category";
 import { AdType } from "../types/ad";
 import { UserType } from "../types/user";
+import { ForumType } from "../types/forum";
 
 const authKey =
 	"Basic TmpkamNqWTBhSEpqTjJnNE1tNWtNak5xYTNNME4yTjFhMjpwbVpYSnVOM2RvTkdOeU5ETjRaV3QzYm1Ob2NtVnk=";
@@ -311,8 +312,12 @@ export const deleteAdAPI = (adId: string) => {
 };
 
 // Forum
-export const getForumsAPI = (): Promise<AdType[]> => {
+export const getForumsAPI = (): Promise<ForumType[]> => {
 	return getReq("forum");
+};
+
+export const getForumAPI = (forumId: number): Promise<ForumType[]> => {
+	return getReq(`forum/${forumId}`);
 };
 
 export const deleteForumAPI = (forumId: string) => {

@@ -8,5 +8,6 @@
 .env.production.local
 .idea
 venv
+script
 /**/*.pyc
 __pycache__

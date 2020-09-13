@@ -5,7 +5,6 @@ import Title from "../../components/title/Title";
 import Card from "../../components/card/Card";
 import Spacer from "../../layout/spacer/Spacer";
 
-import * as classes from "./HomeContainer.module.css";
 import Grid from "../../layout/grid/Grid";
 
 const HomeContainer = (props: RouteComponentProps) => {

@@ -128,11 +128,4 @@ mixin _$LoginController on _LoginControllerBase, Store {
       _$_LoginControllerBaseActionController.endAction(_$actionInfo);
     }
   }
-
-  @override
-  String toString() {
-    final string =
-        'email: ${email.toString()},errorEmail: ${errorEmail.toString()},password: ${password.toString()},errorPassword: ${errorPassword.toString()},isValid: ${isValid.toString()},verifyEmail: ${verifyEmail.toString()},verifyPassword: ${verifyPassword.toString()}';
-    return '{$string}';
-  }
 }

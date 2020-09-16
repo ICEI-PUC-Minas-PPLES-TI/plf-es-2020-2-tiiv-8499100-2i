@@ -295,11 +295,4 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
       _$_RegisterControllerBaseActionController.endAction(_$actionInfo);
     }
   }
-
-  @override
-  String toString() {
-    final string =
-        'email: ${email.toString()},errorEmail: ${errorEmail.toString()},password: ${password.toString()},errorPassword: ${errorPassword.toString()},confirmPassword: ${confirmPassword.toString()},errorConfirm: ${errorConfirm.toString()},name: ${name.toString()},errorName: ${errorName.toString()},cpfCnpj: ${cpfCnpj.toString()},phone: ${phone.toString()},errorPhone: ${errorPhone.toString()},company: ${company.toString()},isValid: ${isValid.toString()},verifyEmail: ${verifyEmail.toString()},verifyPassword: ${verifyPassword.toString()},verifyConfirm: ${verifyConfirm.toString()},verifyName: ${verifyName.toString()},verifyPhone: ${verifyPhone.toString()}';
-    return '{$string}';
-  }
 }

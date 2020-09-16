@@ -124,11 +124,4 @@ mixin _$ServiceStatusData<T> on _ServiceStatusData<T>, Store {
       _$_ServiceStatusDataActionController.endAction(_$actionInfo);
     }
   }
-
-  @override
-  String toString() {
-    final string =
-        'isDone: ${isDone.toString()},isPending: ${isPending.toString()},isError: ${isError.toString()},getStatus: ${getStatus.toString()},getData: ${getData.toString()},getError: ${getError.toString()}';
-    return '{$string}';
-  }
 }

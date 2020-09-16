@@ -400,11 +400,4 @@ mixin _$CalculatorController on _CalculatorControllerBase, Store {
       _$_CalculatorControllerBaseActionController.endAction(_$actionInfo);
     }
   }
-
-  @override
-  String toString() {
-    final string =
-        'typeCalculator: ${typeCalculator.toString()},typeElement: ${typeElement.toString()},size: ${size.toString()},errorTextSize: ${errorTextSize.toString()},superiorTolerance: ${superiorTolerance.toString()},errorTextSuperior: ${errorTextSuperior.toString()},lowerTolerance: ${lowerTolerance.toString()},errorTextLower: ${errorTextLower.toString()},geometricTolerance: ${geometricTolerance.toString()},errorTextGeometricTolerance: ${errorTextGeometricTolerance.toString()},geometricFeature: ${geometricFeature.toString()},modifier: ${modifier.toString()},mmc: ${mmc.toString()},lmc: ${lmc.toString()},virtualCondition: ${virtualCondition.toString()}';
-    return '{$string}';
-  }
 }

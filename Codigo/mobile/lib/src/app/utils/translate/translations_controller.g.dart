@@ -52,11 +52,4 @@ mixin _$TranslationsController on _TranslationsController, Store {
     return _$setNewLanguageAsyncAction
         .run(() => super.setNewLanguage(newLanguage));
   }
-
-  @override
-  String toString() {
-    final string =
-        'currentLanguage: ${currentLanguage.toString()},currentLocale: ${currentLocale.toString()}';
-    return '{$string}';
-  }
 }

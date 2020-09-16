@@ -69,11 +69,4 @@ mixin _$AuthenticatedController on _AuthenticatedController, Store {
       _$_AuthenticatedControllerActionController.endAction(_$actionInfo);
     }
   }
-
-  @override
-  String toString() {
-    final string =
-        'authenticatedState: ${authenticatedState.toString()},isAuthenticated: ${isAuthenticated.toString()}';
-    return '{$string}';
-  }
 }

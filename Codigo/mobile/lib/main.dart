@@ -3,6 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
+import 'package:inteligenciaindustrialapp/src/app/models/entities/post/post_entity.dart';
+import 'package:inteligenciaindustrialapp/src/app/models/entities/symbol/category/symbol_category_entity.dart';
+import 'package:inteligenciaindustrialapp/src/app/models/entities/symbol/subcategory/symbol_subcategory_entity.dart';
+import 'package:inteligenciaindustrialapp/src/app/models/entities/symbol/symbol_entity.dart';
+import 'package:inteligenciaindustrialapp/src/app/models/entities/user/user_entity.dart';
+import 'package:inteligenciaindustrialapp/src/app/models/entities/video/category/video_category_entity.dart';
+import 'package:inteligenciaindustrialapp/src/app/models/entities/video/subcategory/video_subcategory_entity.dart';
+import 'package:inteligenciaindustrialapp/src/app/models/entities/video/video_entity.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/auth/login_controller.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/auth/register_controller.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/home/home_controller.dart';
@@ -15,6 +24,7 @@ import 'package:inteligenciaindustrialapp/src/app/utils/translate/global_transla
 import 'package:inteligenciaindustrialapp/src/app/utils/translate/preferences.dart';
 import 'package:inteligenciaindustrialapp/src/app/utils/translate/translations_controller.dart';
 import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:wakelock/wakelock.dart';
 
 import 'src/app/shared/alert-dialog/alert_controller.dart';
@@ -28,6 +38,8 @@ bool intro;
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await _configDatabase();
 
   _registerStores();
   await frwkLanguage.init();
@@ -69,6 +81,33 @@ _registerStores() {
   getIt.registerSingleton(VideoController());
   getIt.registerSingleton(RegisterController());
   getIt.registerSingleton(LoginController());
+}
+
+_configDatabase() async {
+  final dir = await getApplicationDocumentsDirectory();
+  Hive
+    ..init(dir.path)
+    ..registerAdapter(PostEntityAdapter()) //0
+    ..registerAdapter(SymbolEntityAdapter()) //1
+    ..registerAdapter(SymbolCategoryEntityAdapter()) //2
+    ..registerAdapter(SymbolSubcategoryEntityAdapter()) //3
+    ..registerAdapter(VideoEntityAdapter()) //4
+    ..registerAdapter(VideoCategoryEntityAdapter()) //5
+    ..registerAdapter(VideoSubcategoryEntityAdapter()) //6
+    ..registerAdapter(UserEntityAdapter()); //7
+
+  /*await Hive.openBox<EmployerEntity>('employers');
+  await Hive.openBox<EmployeeEntity>('employees');
+  await Hive.openBox<PunchEntity>('punches');
+  await Hive.openBox<QuizEntity>('quizzes');
+  await Hive.openBox<QuizAnswerEntity>('answers');
+  await Hive.openBox<LastPunchEntity>('last_punch');
+  await Hive.openBox<ActivityEntity>('activities');
+  await Hive.openBox<SendActivityEntity>('send_activities');
+  await Hive.openBox<InItinereEntity>('in_itinere');
+  await Hive.openBox<FileSliceEntity>('file_slices');
+  await Hive.openBox<ConfigEmployeeAppEntity>('config_employee_app');
+  await Hive.openBox<ConfigAppEntity>('config_app');*/
 }
 
 class MyApp extends StatelessWidget {

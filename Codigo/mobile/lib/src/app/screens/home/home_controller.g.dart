@@ -68,10 +68,4 @@ mixin _$HomeController on _HomeControllerBase, Store {
       _$_HomeControllerBaseActionController.endAction(_$actionInfo);
     }
   }
-
-  @override
-  String toString() {
-    final string = 'body: ${body.toString()}';
-    return '{$string}';
-  }
 }

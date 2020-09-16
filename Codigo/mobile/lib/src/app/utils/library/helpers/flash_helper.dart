@@ -298,12 +298,6 @@ class FlashHelper {
                 ? null
                 : Text(title, style: TextStyle(fontSize: 24.0)),
             message: message == null ? null : Text(message),
-            userInputForm: Form(
-              child: TextFormField(
-                controller: editingController,
-                autofocus: true,
-              ),
-            ),
             leftBarIndicatorColor: theme.primaryColor,
             primaryAction: IconButton(
               onPressed: () {

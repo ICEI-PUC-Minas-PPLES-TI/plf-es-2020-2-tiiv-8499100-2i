@@ -51,10 +51,4 @@ mixin _$SymbolController on _SymbolControllerBase, Store {
       _$_SymbolControllerBaseActionController.endAction(_$actionInfo);
     }
   }
-
-  @override
-  String toString() {
-    final string = '';
-    return '{$string}';
-  }
 }

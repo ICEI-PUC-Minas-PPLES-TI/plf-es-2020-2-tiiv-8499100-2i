@@ -41,10 +41,4 @@ mixin _$VideoController on _VideoControllerBase, Store {
       _$_VideoControllerBaseActionController.endAction(_$actionInfo);
     }
   }
-
-  @override
-  String toString() {
-    final string = '';
-    return '{$string}';
-  }
 }

@@ -86,11 +86,4 @@ mixin _$LoadingController on _LoadingController, Store {
       _$_LoadingControllerActionController.endAction(_$actionInfo);
     }
   }
-
-  @override
-  String toString() {
-    final string =
-        'isLoading: ${isLoading.toString()},skeletonLoading: ${skeletonLoading.toString()}';
-    return '{$string}';
-  }
 }

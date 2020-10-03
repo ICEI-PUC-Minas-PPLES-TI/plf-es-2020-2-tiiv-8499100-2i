@@ -4,6 +4,9 @@ from services.base import Session
 def insert(data):
     session = start_session()
     session.add(data)
+    session.commit
+    session.flush
+    print(data.id)
     close_session(session)
 
 
@@ -30,7 +33,7 @@ def update(type_class, id, data):
 
 def delete(type_class, id):
     session = start_session()
-    session.query(type_class).filter(type_class.forum_id == id).delete()
+    session.query(type_class).filter(type_class.id == id).delete()
     close_session(session)
 
 

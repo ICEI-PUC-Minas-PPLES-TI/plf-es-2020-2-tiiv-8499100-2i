@@ -4,10 +4,10 @@ class ForumDTO:
         self.id = id
         self.title = title
 
-    def get_post_id(self):
-        return self.forumId
+    def get_id(self):
+        return self.id
 
-    def set_post_id(self, id):
+    def set_id(self, id):
         self.id = id
 
     def get_title(self):

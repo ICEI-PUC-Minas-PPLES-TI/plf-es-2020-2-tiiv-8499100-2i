@@ -1,6 +1,6 @@
 from datetime import date
 from flask import Blueprint, request, jsonify
-from models.PostView import PostView
+from model.PostView import PostView
 
 post_view = Blueprint('post_view', __name__)
 

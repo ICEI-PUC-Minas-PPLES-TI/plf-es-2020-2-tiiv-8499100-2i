@@ -1,0 +1,38 @@
+from dto.user_dto import UserDTO
+from model.user import User
+from dao.dao_mysql import insert, get_all, get, update, delete
+
+
+def add_user(email, password, name, document, phone, business_name):
+    user = User(None, name, document, phone, business_name, False)
+    user.create_firebase_user(email, password)
+    insert(user)
+
+
+def get_all_users():
+    users = get_all(User)
+    return format_json(users)
+
+
+def get_user(uid):
+    user = get(User, uid)
+    user = user.__dict__
+    return UserDTO(user['uid'], user['name'], user['document'], user['phone'], user['business_name'], user['is_admin']).__dict__
+
+
+def update_user(uid, name, document, phone, business_name):
+    user = User(uid, name, document, phone, business_name, False)
+    update(User, uid, user)
+
+
+def delete_user(uid):
+    delete(User, uid)
+
+
+def format_json(users):
+    users_json = []
+
+    for user in users:
+        user = user.__dict__
+        users_json.append(UserDTO(user['uid'], user['name'], user['document'], user['phone'], user['business_name'], user['is_admin']).__dict__)
+    return users_json

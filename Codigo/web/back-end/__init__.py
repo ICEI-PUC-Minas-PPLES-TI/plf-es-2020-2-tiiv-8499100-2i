@@ -1,17 +1,17 @@
 from flask import Flask
 from flask_cors import CORS
 
-from controllers.ad import ad
-from controllers.post import post
+from controllers.ad_controller import ad
+from controllers.post_controller import post
 from controllers.forum_controller import forum
-from controllers.user import user
-from controllers.video import video
-from controllers.author import author
-from controllers.symbol import symbol
-from controllers.video_category import video_category
-from controllers.symbol_category import symbol_category
-from controllers.video_sub_category import video_sub_category
-from controllers.symbol_sub_category import symbol_sub_category
+from controllers.user_controller import user
+from controllers.video_controller import video
+from controllers.author_controller import author
+from controllers.symbol_controller import symbol
+from controllers.video_category_controller import video_category
+from controllers.symbol_category_controller import symbol_category
+from controllers.video_subcategory_controller import video_subcategory
+from controllers.symbol_subcategory_controller import symbol_subcategory
 from controllers.post_view import post_view
 from controllers.symbol_view import symbol_view
 from controllers.video_view import video_view
@@ -26,10 +26,10 @@ app.register_blueprint(forum)
 app.register_blueprint(author)
 app.register_blueprint(symbol)
 app.register_blueprint(symbol_category)
-app.register_blueprint(symbol_sub_category)
+app.register_blueprint(symbol_subcategory)
 app.register_blueprint(video)
 app.register_blueprint(video_category)
-app.register_blueprint(video_sub_category)
+app.register_blueprint(video_subcategory)
 app.register_blueprint(ad)
 app.register_blueprint(user)
 

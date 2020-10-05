@@ -1,15 +1,16 @@
 from dto.forum_dto import ForumDTO
-from models.forum import Forum
+from dto.forum_post_dto import ForumPostDTO
+from model.forum import Forum
 from dao.dao_mysql import insert, get_all, get, update, delete
-from models.forum_post import ForumPost
+from model.forum_post import ForumPost
 from datetime import datetime
 
 
 def add_forum(title, body, uid):
     forum = Forum(title)
-    insert(forum)
-    forum_id = 1
-    add_post(body, datetime.now.ISO_FORMAT, True, uid, forum_id)
+    id = insert(forum)
+
+    add_post(body, datetime.now().isoformat(), True, uid, id)
 
 
 def get_all_forums():
@@ -17,19 +18,42 @@ def get_all_forums():
     return format_json(forums)
 
 
-def get_forum(forum_id):
-    forum = get(Forum, forum_id)
+def get_forum(id):
+    forum = get(Forum, id)
+    forumposts_json = []
+    original_post = None
+
+    for forumpost in forum.forum_posts:
+        forumpost = forumpost.__dict__
+
+        if (forumpost['is_original_post'] == True):
+            original_post = ForumPostDTO(
+                forumpost['id'],
+                forumpost['body'],
+                forumpost['date'],
+                forumpost['is_original_post']
+            ).__dict__
+        else:
+            forumposts_json.append(
+                ForumPostDTO(
+                    forumpost['id'],
+                    forumpost['body'],
+                    forumpost['date'],
+                    forumpost['is_original_post']
+                ).__dict__
+            )
+
     forum = forum.__dict__
-    return ForumDTO(forum['forum_id'], forum['title']).__dict__
+    return ForumDTO(forum['id'], forum['title'], forumposts_json, original_post).__dict__
 
 
-def update_forum(forum_id, title):
+def update_forum(id, title):
     forum = Forum(title)
-    update(Forum, forum_id, forum)
+    update(Forum, id, forum)
 
 
-def delete_forum(forum_id):
-    delete(Forum, forum_id)
+def delete_forum(id):
+    delete(Forum, id)
 
 
 def add_post(body, date, is_original_post, uid, forum_id):
@@ -41,6 +65,29 @@ def format_json(forums):
     forums_json = []
 
     for forum in forums:
+        forumposts_json = []
+        original_post = None
+
+        for forumpost in forum.forum_posts:
+            forumpost = forumpost.__dict__
+
+            if (forumpost['is_original_post'] == True):
+                original_post = ForumPostDTO(
+                    forumpost['id'],
+                    forumpost['body'],
+                    forumpost['date'],
+                    forumpost['is_original_post']
+                ).__dict__
+            else:
+                forumposts_json.append(
+                    ForumPostDTO(
+                        forumpost['id'],
+                        forumpost['body'],
+                        forumpost['date'],
+                        forumpost['is_original_post']
+                    ).__dict__
+                )
+
         forum = forum.__dict__
-        forums_json.append(ForumDTO(forum['forum_id'], forum['title']).__dict__)
+        forums_json.append(ForumDTO(forum['id'], forum['title'], forumposts_json, original_post).__dict__)
     return forums_json

@@ -1,8 +1,9 @@
 class AdDTO:
 
-    def __init__(self, id, text):
+    def __init__(self, id, text, img):
         self.id = id
         self.text = text
+        self.img = img
 
     def get_id(self):
         return self.id
@@ -15,3 +16,9 @@ class AdDTO:
 
     def set_text(self, text):
         self.text = text
+
+    def get_img(self):
+        return self.img
+
+    def set_img(self, img):
+        self.img = img

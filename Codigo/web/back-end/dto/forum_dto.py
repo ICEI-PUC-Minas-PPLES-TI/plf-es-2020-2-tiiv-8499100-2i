@@ -1,8 +1,10 @@
 class ForumDTO:
 
-    def __init__(self, id, title):
+    def __init__(self, id, title, forumPosts, originalPost):
         self.id = id
         self.title = title
+        self.forumPosts = forumPosts
+        self.originalPost = originalPost
 
     def get_id(self):
         return self.id

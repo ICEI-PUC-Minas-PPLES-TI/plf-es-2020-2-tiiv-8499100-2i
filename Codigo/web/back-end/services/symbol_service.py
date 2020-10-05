@@ -1,0 +1,37 @@
+from dto.symbol_dto import SymbolDTO
+from model.symbol import Symbol
+from dao.dao_mysql import insert, get_all, get, update, delete
+
+
+def add_symbol(title, body, img, subcategory_id):
+    symbol = Symbol(title, body, img, subcategory_id)
+    insert(symbol)
+
+
+def get_all_symbols():
+    symbols = get_all(Symbol)
+    return format_json(symbols)
+
+
+def get_symbol(id):
+    symbol = get(Symbol, id)
+    symbol = symbol.__dict__
+    return SymbolDTO(symbol['id'], symbol['title'], symbol['body'], symbol['img'], symbol['subcategory_id']).__dict__
+
+
+def update_symbol(id, title, body, img, subcategory_id):
+    symbol = Symbol(title, body, img, subcategory_id)
+    update(Symbol, id, symbol)
+
+
+def delete_symbol(id):
+    delete(Symbol, id)
+
+
+def format_json(symbols):
+    symbols_json = []
+
+    for symbol in symbols:
+        symbol = symbol.__dict__
+        symbols_json.append(SymbolDTO(symbol['id'], symbol['title'], symbol['body'], symbol['img'], symbol['subcategory_id']).__dict__)
+    return symbols_json

@@ -4,23 +4,23 @@ from services.base import Session
 def insert(data):
     session = start_session()
     session.add(data)
-    session.commit
-    session.flush
-    print(data.id)
-    close_session(session)
+    session.commit()
+    session.refresh(data)
+    id = data.id
+
+    session.close()
+    return id
 
 
 def get_all(type_class):
     session = start_session()
     data = session.query(type_class).all()
-    # close_session(session)
     return data
 
 
 def get(type_class, id):
     session = start_session()
     data = session.query(type_class).get(id)
-    # close_session(session)
     return data
 
 

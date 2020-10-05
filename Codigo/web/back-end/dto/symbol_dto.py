@@ -1,9 +1,8 @@
 class SymbolDTO:
-	def __init__(self, id, title, body, date, img, subcategory):
+	def __init__(self, id, title, body, img, subcategory):
 		self.id = id
 		self.title = title
 		self.body = body
-		self.date = date
 		self.img = img
 		self.subcategory = subcategory
 
@@ -24,12 +23,6 @@ class SymbolDTO:
 
 	def set_body(self, body):
 		self.body = body
-
-	def get_date(self):
-		return self.date
-
-	def set_date(self, date):
-		self.date = date
 
 	def get_img(self):
 		return self.img

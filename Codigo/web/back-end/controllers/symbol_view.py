@@ -1,6 +1,6 @@
 from datetime import date
 from flask import Blueprint, request, jsonify
-from models.SymbolView import SymbolView
+from model.SymbolView import SymbolView
 
 symbol_view = Blueprint('symbol_view', __name__)
 

@@ -1,6 +1,6 @@
 from datetime import date
 from flask import Blueprint, request, jsonify
-from models.CalculatorView import CalculatorView
+from model.CalculatorView import CalculatorView
 
 calculator_view = Blueprint('calculator_view', __name__)
 

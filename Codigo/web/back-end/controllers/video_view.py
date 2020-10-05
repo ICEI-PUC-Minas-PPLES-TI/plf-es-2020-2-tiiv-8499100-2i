@@ -1,6 +1,6 @@
 from datetime import date
 from flask import Blueprint, request, jsonify
-from models.VideoView import VideoView
+from model.VideoView import VideoView
 
 video_view = Blueprint('video_view', __name__)
 

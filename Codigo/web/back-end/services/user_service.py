@@ -1,9 +1,11 @@
 from dto.user_dto import UserDTO
 from model.user import User
 from dao.dao_mysql import insert, get_all, get, update, delete
+from utils.validate_params import validate_text_param
 
 
 def add_user(email, password, name, document, phone, business_name):
+    validate_params(name)
     user = User(None, name, document, phone, business_name, False)
     user.create_firebase_user(email, password)
     insert(user)
@@ -36,3 +38,7 @@ def format_json(users):
         user = user.__dict__
         users_json.append(UserDTO(user['uid'], user['name'], user['document'], user['phone'], user['business_name'], user['is_admin']).__dict__)
     return users_json
+
+
+def validate_params(name):
+    validate_text_param(name)

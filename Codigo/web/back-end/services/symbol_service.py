@@ -1,6 +1,7 @@
 from dto.symbol_dto import SymbolDTO
 from model.symbol import Symbol
 from dao.dao_mysql import insert, get_all, get, update, delete
+from utils.validate_params import validate_text_param
 
 
 def add_symbol(title, body, img, subcategory_id):
@@ -33,5 +34,11 @@ def format_json(symbols):
 
     for symbol in symbols:
         symbol = symbol.__dict__
-        symbols_json.append(SymbolDTO(symbol['id'], symbol['title'], symbol['body'], symbol['img'], symbol['subcategory_id']).__dict__)
+        symbols_json.append(
+            SymbolDTO(symbol['id'], symbol['title'], symbol['body'], symbol['img'], symbol['subcategory_id']).__dict__)
     return symbols_json
+
+
+def validate_params(title, body):
+    validate_text_param(title)
+    validate_text_param(body)

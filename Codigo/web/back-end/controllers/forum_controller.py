@@ -1,5 +1,5 @@
 import datetime
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, Response
 from services import forum_service
 
 forum = Blueprint('forum', __name__)
@@ -13,7 +13,7 @@ def insert():
 
     forum_service.add_forum(title, body, uid)
 
-    return "forum adicionado."
+    return Response(status=201)
 
 
 @forum.route("/forum", methods=['GET'])
@@ -33,13 +33,13 @@ def update(id):
     title = request.form['title']
     forum_service.update_forum(id, title)
 
-    return "forum atualizado."
+    return Response(status=201)
 
 
-@forum.route("/forum/<int:id>", methods=['DELETE'])
-def delete(id):
-    forum_service.delete_forum(id)
-    return "forum deletado"
+@forum.route("/forum/<int:forum_id>", methods=['DELETE'])
+def delete(forum_id):
+    forum_service.delete_forum(forum_id)
+    return Response(status=200)
 
 
 @forum.route("/forum/<int:forum_id>/add_response", methods=['POST'])

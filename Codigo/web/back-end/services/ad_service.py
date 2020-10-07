@@ -1,6 +1,7 @@
 from dto.ad_dto import AdDTO
 from model.ad import Ad
 from dao.dao_mysql import insert, get_all, get, update, delete
+from utils.validate_params import validate_text_param
 
 
 def add_ad(text, img):

@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, Response
 from services import ad_service
 
 ad = Blueprint('ad', __name__)
@@ -11,7 +11,7 @@ def insert():
 
     ad_service.add_ad(text, img)
 
-    return "forum adicionado."
+    return Response(status=201)
 
 
 @ad.route("/ad", methods=['GET'])
@@ -33,10 +33,10 @@ def update(id):
 
     ad_service.update_ad(id, text, img)
 
-    return "forum atualizado."
+    return Response(status=201)
 
 
 @ad.route("/ad/<int:id>", methods=['DELETE'])
 def delete(id):
     ad_service.delete_ad(id)
-    return "forum deletado"
+    return Response(status=200)

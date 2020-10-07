@@ -1,5 +1,5 @@
 import datetime
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, Response
 from services import post_service
 
 post = Blueprint('post', __name__)
@@ -16,7 +16,7 @@ def insert():
 
     post_service.add_post(title, body, date, img, requires_login, author_id)
 
-    return "forum adicionado."
+    return Response(status=201)
 
 
 @post.route("/post", methods=['GET'])
@@ -42,10 +42,10 @@ def update(id):
 
     post_service.update_post(id, title, body, date, img, requires_login, author_id)
 
-    return "forum atualizado."
+    return Response(status=201)
 
 
 @post.route("/post/<int:id>", methods=['DELETE'])
 def delete(id):
     post_service.delete_post(id)
-    return "forum deletado"
+    return Response(status=200)

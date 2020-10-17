@@ -20,6 +20,17 @@ def get_all():
     return jsonify(response)
 
 
+@video_subcategory.route("/video_subcategory/category/<int:id>", methods=['GET'])
+def get_category(id):
+    response = video_subcategory_service.get_all_video_subcategories()
+    formatted_categories = []
+    for c in response:
+        if (c['category'] == id):
+            formatted_categories.append(c)
+
+    return jsonify(formatted_categories)
+
+
 @video_subcategory.route("/video_subcategory/<int:id>", methods=['GET'])
 def get(id):
     response = video_subcategory_service.get_video_subcategory(id)

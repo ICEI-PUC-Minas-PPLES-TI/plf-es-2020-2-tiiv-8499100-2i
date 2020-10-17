@@ -1,4 +1,5 @@
 from sqlalchemy import Column, String, Integer, Boolean, Date, ForeignKey
+from sqlalchemy.orm import relationship
 from services.base import Base
 
 
@@ -9,8 +10,9 @@ class ForumPost(Base):
     body = Column(String, nullable=False)
     date = Column(Date, nullable=False)
     is_original_post = Column(Boolean, nullable=False)
-    uid = Column(String, nullable=False)
+    uid = Column(String, ForeignKey("user.uid"))
     forum_id = Column(Integer, ForeignKey('forum.id'))
+    user = relationship("User")
 
     def __init__(self, body, date, is_original_post, uid, forum_id):
         self.body = body

@@ -1,5 +1,5 @@
 export type AdType = {
-	ad_id: string;
+	id: number;
 	text: string;
 	img?: string;
 };

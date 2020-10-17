@@ -1,11 +1,13 @@
 from dto.ad_dto import AdDTO
 from model.ad import Ad
 from dao.dao_mysql import insert, get_all, get, update, delete
-from utils.validate_params import validate_text_param
+from credentials import storage
 
 
 def add_ad(text, img):
-    ad = Ad(text, img)
+    img_path = storage.upload_image_file(img, "ad")
+
+    ad = Ad(text, img_path)
     insert(ad)
 
 

@@ -9,10 +9,10 @@ post = Blueprint('post', __name__)
 def insert():
     title = request.form['title']
     body = request.form['body']
-    img = request.form['img']
+    img = request.files.get('img')
     date = datetime.datetime.now().isoformat()
     author_id = request.form['author_id']
-    requires_login = request.form['requires_login'] == 'true'
+    requires_login = request.form['requires_login']
 
     post_service.add_post(title, body, date, img, requires_login, author_id)
 

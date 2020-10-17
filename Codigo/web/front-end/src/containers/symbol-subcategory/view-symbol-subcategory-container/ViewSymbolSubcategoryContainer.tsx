@@ -28,7 +28,7 @@ const ViewSymbolSubcategoryContainer = (props: RouteComponentProps) => {
 	const deleteSymbolSubcategoriesHandler = async (
 		symbolSubcategoryId: string
 	) => {
-		await deleteSymbolSubcategoryAPI(symbolSubcategoryId);
+		await deleteSymbolSubcategoryAPI(+symbolSubcategoryId);
 		getSymbolSubcategoriesHandler();
 	};
 
@@ -38,9 +38,9 @@ const ViewSymbolSubcategoryContainer = (props: RouteComponentProps) => {
 
 	const symbolSubcategoriesEls = symbolSubcategories?.map(
 		(symbolSubcategory: SymbolSubcategoryType) => (
-			<div key={symbolSubcategory.symbol_sub_category_id}>
+			<div key={symbolSubcategory.id}>
 				<CategoryCard
-					idSelector="symbol_sub_category_id"
+					idSelector="id"
 					category={symbolSubcategory}
 					editCategory={editSymbolSubcategoriesHandler}
 					deleteCategory={deleteSymbolSubcategoriesHandler}

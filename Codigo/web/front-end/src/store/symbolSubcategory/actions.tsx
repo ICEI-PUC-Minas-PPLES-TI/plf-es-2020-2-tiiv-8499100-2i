@@ -33,7 +33,7 @@ export const clearSymbolSubcategory = () => ({
 	type: SymbolSubcategoryActionsEnum.CLEAR_SYMBOL_SUBCATEGORY,
 });
 
-export const fetchSymbolSubcategory = (symbolSubcategoryId: string) => {
+export const fetchSymbolSubcategory = (symbolSubcategoryId: number) => {
 	return async (dispatch: any) => {
 		dispatch(fetchSymbolSubcategoryBegin());
 

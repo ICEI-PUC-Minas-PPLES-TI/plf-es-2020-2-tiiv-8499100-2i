@@ -2,10 +2,13 @@ from dto.symbol_dto import SymbolDTO
 from model.symbol import Symbol
 from dao.dao_mysql import insert, get_all, get, update, delete
 from utils.validate_params import validate_text_param
+from credentials import storage
 
 
 def add_symbol(title, body, img, subcategory_id):
-    symbol = Symbol(title, body, img, subcategory_id)
+    img_path = storage.upload_image_file(img, "symbol")
+
+    symbol = Symbol(title, body, img_path, subcategory_id)
     insert(symbol)
 
 

@@ -31,7 +31,7 @@ export const clearAd = () => ({
 	type: AdActionsEnum.CLEAR_AD,
 });
 
-export const fetchAd = (adId: string) => {
+export const fetchAd = (adId: number) => {
 	return async (dispatch: any) => {
 		dispatch(fetchAdBegin());
 

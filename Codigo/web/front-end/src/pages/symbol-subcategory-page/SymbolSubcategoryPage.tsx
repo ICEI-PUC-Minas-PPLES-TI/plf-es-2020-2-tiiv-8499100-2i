@@ -43,12 +43,12 @@ const SymbolSubcategoryPage = (props: PropsType) => (
 					label="Selecione uma categoria..."
 					options={props.symbolCategories?.map((symbolCategory) => ({
 						label: symbolCategory.name,
-						value: symbolCategory.symbol_category_id,
+						value: symbolCategory.id,
 					}))}
 					inputAttrs={{
-						id: "symbol_category_id",
+						id: "category_id",
 						onChange: props.onChangeInput,
-						defaultValue: props.symbolSubcategory.category_id ?? "",
+						defaultValue: props.symbolSubcategory.categoryId ?? "",
 					}}
 				/>
 			</Row>

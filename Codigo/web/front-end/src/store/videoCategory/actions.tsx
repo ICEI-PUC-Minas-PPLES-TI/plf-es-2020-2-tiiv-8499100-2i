@@ -33,7 +33,7 @@ export const clearVideoCategory = () => ({
 	type: VideoCategoryActionsEnum.CLEAR_VIDEO_CATEGORY,
 });
 
-export const fetchVideoCategory = (videoCategoryId: string) => {
+export const fetchVideoCategory = (videoCategoryId: number) => {
 	return async (dispatch: any) => {
 		dispatch(fetchVideoCategoryBegin());
 

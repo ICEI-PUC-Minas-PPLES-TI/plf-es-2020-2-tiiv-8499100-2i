@@ -8,10 +8,9 @@ const initialState: StateType = {
 	post: {
 		title: "",
 		body: "",
-		date: undefined,
 		img: "",
 		author_id: "",
-		user_required: false,
+		requires_login: false,
 	},
 };
 

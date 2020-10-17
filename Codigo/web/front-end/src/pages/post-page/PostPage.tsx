@@ -67,12 +67,12 @@ const PostPage = (props: PropsType) => (
 					label="Selecione um autor..."
 					options={props.authors?.map((author) => ({
 						label: author.name,
-						value: author.author_id,
+						value: author.id,
 					}))}
 					inputAttrs={{
 						id: "author_id",
 						onChange: props.onChangeInput,
-						defaultValue: props.post.author_id ?? "",
+						defaultValue: props.post.authorId ?? "",
 					}}
 				/>
 			</Row>
@@ -80,10 +80,10 @@ const PostPage = (props: PropsType) => (
 			<Row>
 				<Toggle
 					label="Requer usuário cadastrado?"
-					value={props.post.user_required}
+					value={props.post.requiresLogin}
 					onChange={props.onChangeInput}
 					inputAttrs={{
-						id: "user_required",
+						id: "requires_login",
 					}}
 				/>
 			</Row>

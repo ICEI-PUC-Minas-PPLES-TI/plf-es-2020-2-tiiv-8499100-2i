@@ -20,11 +20,11 @@ const ViewAuthorContainer = (props: RouteComponentProps) => {
 		dispatchHook(fetchAuthors());
 	};
 
-	const editAuthorHandler = (authorId: string) => {
+	const editAuthorHandler = (authorId: number) => {
 		props.history.push("/autor/editar/" + authorId);
 	};
 
-	const deleteAuthorHandler = async (authorId: string) => {
+	const deleteAuthorHandler = async (authorId: number) => {
 		await deleteAuthorAPI(authorId);
 		getAuthorsHandler();
 	};
@@ -34,7 +34,7 @@ const ViewAuthorContainer = (props: RouteComponentProps) => {
 	};
 
 	const authorsEls = authors?.map((author: AuthorType) => (
-		<div key={author.author_id}>
+		<div key={author.id}>
 			<AuthorCard
 				author={author}
 				editAuthor={editAuthorHandler}

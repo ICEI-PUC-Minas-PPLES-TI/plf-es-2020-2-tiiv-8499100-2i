@@ -7,7 +7,7 @@ ad = Blueprint('ad', __name__)
 @ad.route("/ad", methods=['POST'])
 def insert():
     text = request.form['text']
-    img = request.form['img']
+    img = request.files.get('img')
 
     ad_service.add_ad(text, img)
 

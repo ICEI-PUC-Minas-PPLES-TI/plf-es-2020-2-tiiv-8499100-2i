@@ -10,7 +10,7 @@ class Post(Base):
     title = Column(String, nullable=False)
     body = Column(Text, nullable=False)
     date = Column(DateTime, nullable=False)
-    publish_date = Column(DateTime, nullable=False)
+    # publish_date = Column(DateTime, nullable=False)
     img = Column(String, nullable=False)
     requires_login = Column(Boolean, nullable=False)
     author_id = Column(Integer, ForeignKey('author.id'))

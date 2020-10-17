@@ -8,7 +8,7 @@ symbol = Blueprint('symbol', __name__)
 def insert():
     title = request.form['title']
     body = request.form['body']
-    img = request.form('img')
+    img = request.files.get('img')
     subcategory_id = request.form['subcategory_id']
 
     symbol_service.add_symbol(title, body, img, subcategory_id)
@@ -20,6 +20,17 @@ def insert():
 def get_all():
     response = symbol_service.get_all_symbols()
     return jsonify(response)
+
+
+@symbol.route("/symbol/category/<int:id>", methods=['GET'])
+def get_category(id):
+    response = symbol_service.get_all_symbols()
+    formatted_categories = []
+    for c in response:
+        if (c['subcategory'] == id):
+            formatted_categories.append(c)
+
+    return jsonify(formatted_categories)
 
 
 @symbol.route("/symbol/<int:id>", methods=['GET'])

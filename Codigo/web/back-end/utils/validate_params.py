@@ -11,7 +11,7 @@ def validate_text_param(param):
 
 
 def validate_date_param(param):
-    if param.date() < datetime.now().date():
+    if datetime.fromisoformat(param).date() < datetime.now().date():
         raise ExceptionUtils.handle_param_exception(ValidationException(ParamsError.INVALID_VALUE.value.format(
             'Date value must be equal or greater than the current date')))
 

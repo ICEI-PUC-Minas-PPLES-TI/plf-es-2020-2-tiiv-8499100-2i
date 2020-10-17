@@ -11,29 +11,23 @@ import Card from "../../card/Card";
 
 type PropsType = {
 	post: PostType;
-	editPost: (postId: string) => void;
-	deletePost: (postId: string) => void;
+	editPost: (postId: number) => void;
+	deletePost: (postId: number) => void;
 };
 
 const PostCard = (props: PropsType) => (
 	<Card padding={0}>
 		<div className={classes["postCard-imageContainer"]}>
-			<img
-				src={props.post.img}
-				alt=""
-				className={classes["postCard-image"]}
-			/>
+			<img src={props.post.img} alt="" className={classes["postCard-image"]} />
 		</div>
 		<div className={classes["postCard-body"]}>
-			<strong className={classes["postCard-title"]}>
-				{props.post.title}
-			</strong>
+			<strong className={classes["postCard-title"]}>{props.post.title}</strong>
 			<Row>
 				<Button
 					label="editar"
 					size="small"
 					buttonAttrs={{
-						onClick: () => props.editPost(props.post.post_id),
+						onClick: () => props.editPost(props.post.id),
 					}}
 				/>
 				<Spacer horizontal="flex" />
@@ -41,7 +35,7 @@ const PostCard = (props: PropsType) => (
 					label="excluir"
 					size="small"
 					buttonAttrs={{
-						onClick: () => props.deletePost(props.post.post_id),
+						onClick: () => props.deletePost(props.post.id),
 					}}
 				/>
 			</Row>

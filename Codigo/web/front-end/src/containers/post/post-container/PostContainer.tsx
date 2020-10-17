@@ -12,7 +12,7 @@ import Spinner from "../../../components/spinner/Spinner";
 const PostContainer = (props: RouterProps) => {
 	const dispatchHook = useDispatch();
 
-	const { postId } = useParams();
+	const { postId } = useParams<any>();
 	const { post, status } = useSelector((state: any) => state.post);
 	const { authors } = useSelector((state: any) => state.authors);
 
@@ -21,7 +21,7 @@ const PostContainer = (props: RouterProps) => {
 	useEffect(() => {
 		dispatchHook(fetchAuthors());
 		if (postId) {
-			dispatchHook(fetchPost(postId));
+			dispatchHook(fetchPost(+postId));
 		}
 
 		return () => {
@@ -72,7 +72,7 @@ const PostContainer = (props: RouterProps) => {
 				return;
 			}
 
-			await putPostAPI(postId, post);
+			await putPostAPI(+postId, post);
 			props.history.push("/post");
 		} catch {
 			alert("Ocorreu um erro. Tente novamente mais tarde.");

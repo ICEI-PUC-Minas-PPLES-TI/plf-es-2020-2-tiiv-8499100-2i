@@ -2,7 +2,7 @@ import React from "react";
 import { RouteComponentProps } from "react-router";
 
 import LoginPage from "../../pages/login-page/LoginPage";
-import { auth, getUserAPI } from "../../api/api";
+import { authenticate } from "../../api/api";
 import { saveUser } from "../../utils/session";
 
 export const LoginContainer = (props: RouteComponentProps) => {
@@ -12,14 +12,10 @@ export const LoginContainer = (props: RouteComponentProps) => {
 		const password = event.target.elements.password.value;
 
 		try {
-			const authData = await auth().signInWithEmailAndPassword(
-				email,
-				password
-			);
-			const { uid } = authData.user!;
-			const user = await getUserAPI(uid);
+			const res = await authenticate(email, password);
+			const user = await res.json();
 
-			if (!user.is_admin) {
+			if (!user.isAdmin) {
 				throw new Error();
 			}
 

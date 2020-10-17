@@ -40,12 +40,12 @@ const VideoSubcategoryPage = (props: PropsType) => (
 					label="Selecione uma categoria..."
 					options={props.videoCategories?.map((videoCategory) => ({
 						label: videoCategory.name,
-						value: videoCategory.video_category_id,
+						value: videoCategory.id,
 					}))}
 					inputAttrs={{
 						id: "category_id",
 						onChange: props.onChangeInput,
-						defaultValue: props.videoSubcategory.category_id ?? "",
+						defaultValue: props.videoSubcategory.categoryId ?? "",
 					}}
 				/>
 			</Row>

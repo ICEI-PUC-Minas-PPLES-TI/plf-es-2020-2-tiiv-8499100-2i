@@ -14,7 +14,7 @@ import Spinner from "../../../components/spinner/Spinner";
 const VideoContainer = (props: RouterProps) => {
 	const dispatchHook = useDispatch();
 
-	const { videoId } = useParams();
+	const { videoId } = useParams<any>();
 	const { video, status } = useSelector((state: any) => state.video);
 	const { videoSubcategories } = useSelector(
 		(state: any) => state.videoSubcategories
@@ -24,10 +24,10 @@ const VideoContainer = (props: RouterProps) => {
 
 	useEffect(() => {
 		if (videoId) {
-			dispatchHook(fetchVideo(videoId));
-			dispatchHook(fetchVideoSubcategories());
+			dispatchHook(fetchVideo(+videoId));
 		}
 
+		dispatchHook(fetchVideoSubcategories());
 		return () => {
 			dispatchHook(clearVideo());
 		};
@@ -43,6 +43,14 @@ const VideoContainer = (props: RouterProps) => {
 		);
 	};
 
+	const onUpdateInfo = (data: { key: string; value: string }) => {
+		dispatchHook(
+			updateVideo({
+				[data.key]: data.value,
+			})
+		);
+	};
+
 	const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		setLoading(true);
@@ -54,7 +62,7 @@ const VideoContainer = (props: RouterProps) => {
 				return;
 			}
 
-			await putVideoAPI(videoId, video);
+			await putVideoAPI(+videoId, video);
 			props.history.push("/video");
 		} catch {
 			alert("Ocorreu um erro. Tente novamente mais tarde.");
@@ -70,6 +78,7 @@ const VideoContainer = (props: RouterProps) => {
 				type="new"
 				onSubmit={onSubmit}
 				onChangeInput={onChangeInput}
+				onUpdateInfo={onUpdateInfo}
 				video={video}
 				videoSubcategories={videoSubcategories}
 			/>
@@ -78,6 +87,7 @@ const VideoContainer = (props: RouterProps) => {
 				type="update"
 				onSubmit={onSubmit}
 				onChangeInput={onChangeInput}
+				onUpdateInfo={onUpdateInfo}
 				video={video}
 				videoSubcategories={videoSubcategories}
 			/>

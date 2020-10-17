@@ -16,11 +16,11 @@ def get_all_videos():
 def get_video(id):
     video = get(Video, id)
     video = video.__dict__
-    return VideoDTO(video['id'], video['title'], video['youtube_url'], video['date'], video['category_id']).__dict__
+    return VideoDTO(video['id'], video['title'], video['date'].isoformat(), video['youtube_url'], video['subcategory_id']).__dict__
 
 
-def update_video(id, title, youtube_url, date, subcategory_id):
-    video = Video(title, youtube_url, date, subcategory_id)
+def update_video(id, title, youtube_url, subcategory_id):
+    video = Video(title, youtube_url, subcategory_id)
     update(Video, id, video)
 
 
@@ -33,5 +33,5 @@ def format_json(videos):
 
     for video in videos:
         video = video.__dict__
-        videos_json.append(VideoDTO(video['id'], video['title'], video['youtube_url'], video['date'], video['category_id']).__dict__)
+        videos_json.append(VideoDTO(video['id'], video['title'], video['date'].isoformat(), video['youtube_url'], video['subcategory_id']).__dict__)
     return videos_json

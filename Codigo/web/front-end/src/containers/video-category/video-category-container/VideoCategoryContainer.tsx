@@ -13,7 +13,7 @@ import Spinner from "../../../components/spinner/Spinner";
 const VideoCategoryContainer = (props: RouterProps) => {
 	const dispatchHook = useDispatch();
 
-	const { videoCategoryId } = useParams();
+	const { videoCategoryId } = useParams<any>();
 	const { videoCategory, status } = useSelector(
 		(state: any) => state.videoCategory
 	);
@@ -22,7 +22,7 @@ const VideoCategoryContainer = (props: RouterProps) => {
 
 	useEffect(() => {
 		if (videoCategoryId) {
-			dispatchHook(fetchVideoCategory(videoCategoryId));
+			dispatchHook(fetchVideoCategory(+videoCategoryId));
 		}
 
 		return () => {
@@ -51,7 +51,7 @@ const VideoCategoryContainer = (props: RouterProps) => {
 				return;
 			}
 
-			await putVideoCategoryAPI(videoCategoryId, videoCategory);
+			await putVideoCategoryAPI(+videoCategoryId, videoCategory);
 			props.history.push("/categoria-video");
 		} catch {
 			alert("Ocorreu um erro. Tente novamente mais tarde.");

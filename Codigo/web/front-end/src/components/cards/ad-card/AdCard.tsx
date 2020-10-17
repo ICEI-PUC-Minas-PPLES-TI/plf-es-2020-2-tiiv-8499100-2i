@@ -22,7 +22,7 @@ const AdCard = (props: PropsType) => (
 				label="editar"
 				size="small"
 				buttonAttrs={{
-					onClick: () => props.editAd(props.ad.ad_id),
+					onClick: () => props.editAd(props.ad.id),
 				}}
 			/>
 			<Spacer horizontal={20} />
@@ -30,7 +30,7 @@ const AdCard = (props: PropsType) => (
 				label="excluir"
 				size="small"
 				buttonAttrs={{
-					onClick: () => props.deleteAd(props.ad.ad_id),
+					onClick: () => props.deleteAd(props.ad.id),
 				}}
 			/>
 		</Row>

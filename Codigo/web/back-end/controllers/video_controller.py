@@ -8,9 +8,10 @@ video = Blueprint('video', __name__)
 def insert():
     title = request.form['title']
     youtube_url = request.form['youtube_url']
+    date = request.form['date']
     subcategory_id = request.form['subcategory_id']
 
-    video_service.add_video(title, youtube_url, subcategory_id)
+    video_service.add_video(title, youtube_url, date, subcategory_id)
 
     return "forum adicionado."
 
@@ -19,6 +20,17 @@ def insert():
 def get_all():
     response = video_service.get_all_videos()
     return jsonify(response)
+
+
+@video.route("/video/category/<int:id>", methods=['GET'])
+def get_category(id):
+    response = video_service.get_all_videos()
+    formatted_categories = []
+    for c in response:
+        if (c['subcategory'] == id):
+            formatted_categories.append(c)
+
+    return jsonify(formatted_categories)
 
 
 @video.route("/video/<int:id>", methods=['GET'])

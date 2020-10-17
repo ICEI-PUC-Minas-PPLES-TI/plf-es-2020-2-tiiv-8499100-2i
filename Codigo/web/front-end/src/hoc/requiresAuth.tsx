@@ -5,7 +5,7 @@ import { Redirect } from "react-router";
 const requiresAuth = (Component: any) => {
 	const ProtectedComponent = (props: any) => {
 		const user = retrieveUser();
-		if (user && user.is_admin) {
+		if (user && user.isAdmin) {
 			return <Component {...props} />;
 		}
 

@@ -22,11 +22,11 @@ const ViewSymbolCategoryContainer = (props: RouteComponentProps) => {
 		dispatchHook(fetchSymbolCategories());
 	};
 
-	const editSymbolSubcategoryHandler = (symbolCategoryId: string) => {
+	const editSymbolSubcategoryHandler = (symbolCategoryId: number) => {
 		props.history.push("/categoria-simbolo/editar/" + symbolCategoryId);
 	};
 
-	const deleteSymbolSubcategoryHandler = async (symbolCategoryId: string) => {
+	const deleteSymbolSubcategoryHandler = async (symbolCategoryId: number) => {
 		await deleteSymbolCategoryAPI(symbolCategoryId);
 		getSymbolCategoriesHandler();
 	};
@@ -37,9 +37,9 @@ const ViewSymbolCategoryContainer = (props: RouteComponentProps) => {
 
 	const symbolCategoriesEls = symbolCategories?.map(
 		(symbolCategory: SymbolCategoryType) => (
-			<div key={symbolCategory.symbol_category_id}>
+			<div key={symbolCategory.id}>
 				<CategoryCard
-					idSelector="symbol_category_id"
+					idSelector="id"
 					category={symbolCategory}
 					editCategory={editSymbolSubcategoryHandler}
 					deleteCategory={deleteSymbolSubcategoryHandler}

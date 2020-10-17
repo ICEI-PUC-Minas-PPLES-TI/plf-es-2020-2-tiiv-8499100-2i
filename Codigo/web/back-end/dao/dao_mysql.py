@@ -37,10 +37,15 @@ def delete(type_class, id):
     close_session(session)
 
 
+def delete_all_from_fk(type_class, forum_id):
+    session = start_session()
+    session.query(type_class).filter(type_class.forum_id == forum_id).delete()
+    close_session(session)
+
+
 def start_session():
     # Create a new session
     return Session()
-
 
 def close_session(session):
     session.commit()

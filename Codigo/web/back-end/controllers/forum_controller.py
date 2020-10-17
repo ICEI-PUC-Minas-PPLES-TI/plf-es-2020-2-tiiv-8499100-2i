@@ -53,6 +53,7 @@ def insert_post(forum_id):
     return "forum adicionado."
 
 
-@forum.route("/forum/<int:forum_id>/<int:post_id>", methods=['DELETE'])
-def delete_post():
+@forum.route("/forum/<int:post_id>/delete_post", methods=['DELETE'])
+def delete_post(post_id):
+    forum_service.remove_post(post_id)
     return "forum adicionado."

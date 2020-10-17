@@ -20,6 +20,17 @@ def get_all():
     return jsonify(response)
 
 
+@symbol_subcategory.route("/symbol_subcategory/category/<int:id>", methods=['GET'])
+def get_category(id):
+    response = symbol_subcategory_service.get_all_symbol_subcategories()
+    formatted_categories = []
+    for c in response:
+        if (c['category'] == id):
+            formatted_categories.append(c)
+
+    return jsonify(formatted_categories)
+
+
 @symbol_subcategory.route("/symbol_subcategory/<int:id>", methods=['GET'])
 def get(id):
     response = symbol_subcategory_service.get_symbol_subcategory(id)

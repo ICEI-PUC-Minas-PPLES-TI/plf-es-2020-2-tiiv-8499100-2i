@@ -1,6 +1,7 @@
 export type VideoType = {
-	video_id: string;
+	id: number;
 	title: string;
-	youtube_url: string;
-	category_id: string;
+	date: string;
+	youtubeUrl: string;
+	categoryId: number;
 };

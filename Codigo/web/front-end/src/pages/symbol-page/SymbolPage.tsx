@@ -1,6 +1,6 @@
 import React, { FormEvent, ChangeEvent } from "react";
 
-import { GDTSymbolType } from "../../types/symbol";
+import { SymbolType } from "../../types/symbol";
 
 import Column from "../../layout/column/Column";
 import ImageField from "../../components/image-field/ImageField";
@@ -21,7 +21,7 @@ type PropsType = {
 	) => void;
 	onChangeTextArea: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 	type: "new" | "update";
-	symbol: GDTSymbolType;
+	symbol: SymbolType;
 	symbolSubcategories: SymbolSubcategoryType[];
 };
 
@@ -56,8 +56,7 @@ const SymbolPage = (props: PropsType) => (
 					label="Descrição do símbolo"
 					inputAttrs={{
 						id: "body",
-						placeholder:
-							'Exemplo: O símbolo "straightness" significa...',
+						placeholder: 'Exemplo: O símbolo "straightness" significa...',
 						onChange: props.onChangeTextArea,
 						value: props.symbol.body,
 					}}
@@ -67,16 +66,14 @@ const SymbolPage = (props: PropsType) => (
 			<Row>
 				<Dropdown
 					label="Selecione uma subcategoria..."
-					options={props.symbolSubcategories?.map(
-						(symbolCategory) => ({
-							label: symbolCategory.name,
-							value: symbolCategory.symbol_sub_category_id,
-						})
-					)}
+					options={props.symbolSubcategories?.map((symbolCategory) => ({
+						label: symbolCategory.name,
+						value: symbolCategory.id,
+					}))}
 					inputAttrs={{
-						id: "sub_category_id",
+						id: "subcategory_id",
 						onChange: props.onChangeInput,
-						defaultValue: props.symbol.sub_category_id ?? "",
+						defaultValue: props.symbol.id ?? "",
 					}}
 				/>
 			</Row>

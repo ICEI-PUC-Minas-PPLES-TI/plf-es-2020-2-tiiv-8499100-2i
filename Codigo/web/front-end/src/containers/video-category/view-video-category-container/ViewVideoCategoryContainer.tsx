@@ -21,11 +21,11 @@ const ViewVideoCategoryContainer = (props: RouteComponentProps) => {
 		dispatchHook(fetchVideoCategories());
 	};
 
-	const editVideoCategoriesHandler = (videoCategoryId: string) => {
+	const editVideoCategoriesHandler = (videoCategoryId: number) => {
 		props.history.push("/categoria-video/editar/" + videoCategoryId);
 	};
 
-	const deleteVideoCategoriesHandler = async (videoCategoryId: string) => {
+	const deleteVideoCategoriesHandler = async (videoCategoryId: number) => {
 		await deleteVideoCategoryAPI(videoCategoryId);
 		getVideoCategoriesHandler();
 	};
@@ -36,9 +36,9 @@ const ViewVideoCategoryContainer = (props: RouteComponentProps) => {
 
 	const videoCategoriesEls = videoCategories?.map(
 		(videoCategory: VideoCategoryType) => (
-			<div key={videoCategory.video_category_id}>
+			<div key={videoCategory.id}>
 				<CategoryCard
-					idSelector="video_category_id"
+					idSelector="id"
 					category={videoCategory}
 					editCategory={editVideoCategoriesHandler}
 					deleteCategory={deleteVideoCategoriesHandler}

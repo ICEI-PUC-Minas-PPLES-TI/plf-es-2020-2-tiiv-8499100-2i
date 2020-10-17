@@ -17,7 +17,7 @@ import { fetchSymbolCategories } from "../../../store/symbolCategories/actions";
 const SymbolSubcategoryContainer = (props: RouterProps) => {
 	const dispatchHook = useDispatch();
 
-	const { symbolSubcategoryId } = useParams();
+	const { symbolSubcategoryId } = useParams<any>();
 	const { symbolSubcategory, status } = useSelector(
 		(state: any) => state.symbolSubcategory
 	);
@@ -30,7 +30,7 @@ const SymbolSubcategoryContainer = (props: RouterProps) => {
 	useEffect(() => {
 		dispatchHook(fetchSymbolCategories());
 		if (symbolSubcategoryId) {
-			dispatchHook(fetchSymbolSubcategory(symbolSubcategoryId));
+			dispatchHook(fetchSymbolSubcategory(+symbolSubcategoryId));
 		}
 
 		return () => {
@@ -59,7 +59,7 @@ const SymbolSubcategoryContainer = (props: RouterProps) => {
 				return;
 			}
 
-			await putSymbolSubcategoryAPI(symbolSubcategoryId, symbolSubcategory);
+			await putSymbolSubcategoryAPI(+symbolSubcategoryId, symbolSubcategory);
 			props.history.push("/subcategoria-simbolo");
 		} catch {
 			alert("Ocorreu um erro. Tente novamente mais tarde.");

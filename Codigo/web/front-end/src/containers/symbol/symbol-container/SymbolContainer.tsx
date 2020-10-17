@@ -16,7 +16,7 @@ import Spinner from "../../../components/spinner/Spinner";
 const SymbolContainer = (props: RouterProps) => {
 	const dispatchHook = useDispatch();
 
-	const { symbolId } = useParams();
+	const { symbolId } = useParams<any>();
 	const { symbol, status } = useSelector((state: any) => state.symbol);
 	const { symbolSubcategories } = useSelector(
 		(state: any) => state.symbolSubcategories
@@ -27,7 +27,7 @@ const SymbolContainer = (props: RouterProps) => {
 	useEffect(() => {
 		dispatchHook(fetchSymbolSubcategories());
 		if (symbolId) {
-			dispatchHook(fetchSymbol(symbolId));
+			dispatchHook(fetchSymbol(+symbolId));
 		}
 
 		return () => {
@@ -78,7 +78,7 @@ const SymbolContainer = (props: RouterProps) => {
 				return;
 			}
 
-			await putSymbolAPI(symbolId, symbol);
+			await putSymbolAPI(+symbolId, symbol);
 			props.history.push("/simbolo");
 		} catch {
 			alert("Ocorreu um erro. Tente novamente mais tarde.");

@@ -10,11 +10,11 @@ def insert():
     title = request.form['title']
     body = request.form['body']
     img = request.files.get('img')
-    date = datetime.datetime.now().isoformat()
+    publish_date = request.form['publish_date']
     author_id = request.form['author_id']
     requires_login = request.form['requires_login']
 
-    post_service.add_post(title, body, date, img, requires_login, author_id)
+    post_service.add_post(title, body, publish_date, img, requires_login, author_id)
 
     return Response(status=201)
 
@@ -36,11 +36,11 @@ def update(id):
     title = request.form['title']
     body = request.form['body']
     img = request.files.get('img')
-    date = datetime.datetime.now().isoformat()
+    publish_date = request.form['publish_date']
     author_id = request.form['author_id']
     requires_login = request.form['requires_login']
 
-    post_service.update_post(id, title, body, date, img, requires_login, author_id)
+    post_service.update_post(id, title, body, publish_date, img, requires_login, author_id)
 
     return Response(status=201)
 

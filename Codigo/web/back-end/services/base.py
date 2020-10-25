@@ -3,11 +3,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-host = os.environ['HOST']
-port = os.environ['PORT']
-username = os.environ['USERNAME']
-password = os.environ['PASSWORD']
-database = os.environ['DATABASE']
+host = os.environ.get('HOST')
+port = os.environ.get('PORT')
+username = os.environ.get('USERNAME')
+password = os.environ.get('PASSWORD')
+database = os.environ.get('DATABASE')
 
 engine = create_engine(f'mysql://{username}:{password}@{host}:{port}/{database}')
 Session = sessionmaker(bind=engine)

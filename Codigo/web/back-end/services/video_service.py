@@ -1,6 +1,9 @@
 from dto.video_dto import VideoDTO
 from model.video import Video
 from dao.dao_mysql import insert, get_all, get, update, delete
+from services.ad_service import get_all_ads
+import math
+import random
 
 
 def add_video(title, youtube_url, date, subcategory_id):
@@ -34,4 +37,12 @@ def format_json(videos):
     for video in videos:
         video = video.__dict__
         videos_json.append(VideoDTO(video['id'], video['title'], video['date'].isoformat(), video['youtube_url'], video['subcategory_id']).__dict__)
+
+    ads = get_all_ads()
+    ads_number = math.floor(len(videos) / 3)
+    i = len(videos) - 1
+    for _ in reversed(videos_json):
+        if i != 0 and i % ads_number == 0 and len(ads) > 0:
+            videos_json.insert(i, random.choice(ads))
+        i = i - 1
     return videos_json

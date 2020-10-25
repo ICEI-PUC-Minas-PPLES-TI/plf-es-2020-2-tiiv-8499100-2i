@@ -7,6 +7,7 @@ class PostDTO:
 		self.img = img
 		self.requiresLogin = requiresLogin
 		self.author = author
+		self.isAd = False
 
 	def get_id(self):
 		return self.id

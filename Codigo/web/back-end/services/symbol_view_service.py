@@ -1,21 +1,29 @@
 from model.symbol_view import SymbolView
-from dao.dao_mysql import insert
-from datetime import datetime
+from dao.dao_mysql import get_all, insert
+from dto.symbol_view_dto import SymbolViewDTO
 
-
-def add_symbol_view(current_date, uid, symbol_id):
-    date = datetime.now()
-
-    if current_date is None:
-        current_date = date
-    else:
-        publish_date = __parse_date(publish_date)
-
-    symbol_view = SymbolView(current_date, uid, symbol_id)
+def add_symbol_view(current_date, uid, viewability, symbol_id):
+    symbol_view = SymbolView(current_date, uid, viewability, symbol_id)
     insert(symbol_view)
 
-def __parse_date(date_str):
-    if date_str is None:
-        return None
 
-    return date_str
+def get_all_symbol_views():
+    symbol_views = get_all(SymbolView)
+    return format_json(symbol_views)
+
+
+def format_json(symbol_views):
+    symbol_view_json = []
+
+    for symbol_view in symbol_views:
+        symbol_view = symbol_view.__dict__
+
+        symbol_view_json.append(SymbolViewDTO(
+            symbol_view['id'],
+            symbol_view['date'].isoformat(),
+            symbol_view['uid'],
+            symbol_view['viewability'],
+            symbol_view['symbol_id']
+        ).__dict__)
+
+    return symbol_view_json

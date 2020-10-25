@@ -1,9 +1,11 @@
 class AdDTO:
 
-    def __init__(self, id, text, img):
+    def __init__(self, id, text, img, url):
         self.id = id
         self.text = text
         self.img = img
+        self.url = url
+        self.isAd = True
 
     def get_id(self):
         return self.id

@@ -5,6 +5,7 @@ class SymbolDTO:
 		self.body = body
 		self.img = img
 		self.subcategory = subcategory
+		self.isAd = False
 
 	def get_id(self):
 		return self.id

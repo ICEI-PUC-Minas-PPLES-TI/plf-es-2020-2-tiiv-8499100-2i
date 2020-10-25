@@ -1,5 +1,5 @@
 from services.base import Base
-from sqlalchemy import Column, DateTime, Integer, ForeignKey
+from sqlalchemy import Column, DateTime, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 
 class SymbolView(Base):
@@ -8,13 +8,15 @@ class SymbolView(Base):
     id = Column(Integer, primary_key=True, unique=True, autoincrement=True)
     date = Column(DateTime, nullable=False)
     uid = Column(Integer, ForeignKey('user.uid'))
+    viewability = Column(Float, nullable=False)
     symbol_id = Column(Integer, ForeignKey('symbol.id'))
 
     user = relationship('User')
     symbol = relationship('Symbol')
 
-    def __init__(self, date, uid, symbol_id):
+    def __init__(self, date, uid, viewability, symbol_id):
         self.date = date
         self.uid = uid
+        self.viewability = viewability
         self.symbol_id = symbol_id
 

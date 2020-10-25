@@ -12,10 +12,11 @@ from controllers.video_category_controller import video_category
 from controllers.symbol_category_controller import symbol_category
 from controllers.video_subcategory_controller import video_subcategory
 from controllers.symbol_subcategory_controller import symbol_subcategory
-from controllers.post_view import post_view
-from controllers.symbol_view import symbol_view
-from controllers.video_view import video_view
-from controllers.calculator_view import calculator_view
+from controllers.post_view_controller import post_view
+from controllers.symbol_view_controller import symbol_view
+from controllers.video_view_controller import video_view
+from controllers.calculator_view_controller import calculator_view
+from controllers.forum_view_controller import forum_view
 
 app = Flask(__name__)
 app.config.from_pyfile("credentials/config.py")
@@ -37,6 +38,7 @@ app.register_blueprint(post_view)
 app.register_blueprint(symbol_view)
 app.register_blueprint(video_view)
 app.register_blueprint(calculator_view)
+app.register_blueprint(forum_view)
 
 CORS(app)
 

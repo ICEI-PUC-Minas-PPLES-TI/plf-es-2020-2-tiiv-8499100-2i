@@ -4,10 +4,10 @@ from dao.dao_mysql import insert, get_all, get, update, delete
 from credentials import storage
 
 
-def add_ad(text, img):
+def add_ad(text, img, url):
     img_path = storage.upload_image_file(img, "ad")
 
-    ad = Ad(text, img_path)
+    ad = Ad(text, img_path, url)
     insert(ad)
 
 
@@ -36,5 +36,5 @@ def format_json(ads):
 
     for ad in ads:
         ad = ad.__dict__
-        ads_json.append(AdDTO(ad['id'], ad['text'], ad['img']).__dict__)
+        ads_json.append(AdDTO(ad['id'], ad['text'], ad['img'], ad['url']).__dict__)
     return ads_json

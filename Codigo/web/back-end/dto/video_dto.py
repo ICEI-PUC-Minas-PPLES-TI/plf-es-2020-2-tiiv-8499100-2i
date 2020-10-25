@@ -5,6 +5,7 @@ class VideoDTO:
 		self.title = title
 		self.date = date
 		self.subcategory = subcategory
+		self.isAd = False
 
 	def get_id(self):
 		return self.id

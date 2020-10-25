@@ -1,5 +1,5 @@
 from services.base import Base
-from sqlalchemy import Column, DateTime, Integer, ForeignKey
+from sqlalchemy import Column, DateTime, Integer, ForeignKey, String
 from sqlalchemy.orm import relationship
 
 class CalculatorView(Base):
@@ -11,7 +11,6 @@ class CalculatorView(Base):
     calculator_type = Column(String, nullable=False)
 
     user = relationship('User')
-    calculator = relationship('Calculator')
 
     def __init__(self, date, uid, calculator_type):
         self.date = date

@@ -1,5 +1,5 @@
 export type AuthorType = {
-	author_id: string;
+	id: number;
 	name: string;
 	biography: string;
 };

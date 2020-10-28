@@ -1,7 +1,7 @@
 import React from "react";
 
 import Card from "../../card/Card";
-import { GDTSymbolType } from "../../../types/symbol";
+import { SymbolType } from "../../../types/symbol";
 import Row from "../../../layout/row/Row";
 import Spacer from "../../../layout/spacer/Spacer";
 import Button from "../../button/Button";
@@ -9,9 +9,9 @@ import Button from "../../button/Button";
 import * as classes from "./SymbolCard.module.css";
 
 type PropsType = {
-	symbol: GDTSymbolType;
-	editSymbol: (symbolId: string) => void;
-	deleteSymbol: (symbolId: string) => void;
+	symbol: SymbolType;
+	editSymbol: (symbolId: number) => void;
+	deleteSymbol: (symbolId: number) => void;
 };
 
 const SymbolCard = (props: PropsType) => (
@@ -33,7 +33,7 @@ const SymbolCard = (props: PropsType) => (
 					label="editar"
 					size="small"
 					buttonAttrs={{
-						onClick: () => props.editSymbol(props.symbol.symbol_id),
+						onClick: () => props.editSymbol(props.symbol.id),
 					}}
 				/>
 				<Spacer horizontal="flex" />
@@ -41,8 +41,7 @@ const SymbolCard = (props: PropsType) => (
 					label="excluir"
 					size="small"
 					buttonAttrs={{
-						onClick: () =>
-							props.deleteSymbol(props.symbol.symbol_id),
+						onClick: () => props.deleteSymbol(props.symbol.id),
 					}}
 				/>
 			</Row>

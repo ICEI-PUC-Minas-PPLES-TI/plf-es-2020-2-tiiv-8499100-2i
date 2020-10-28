@@ -11,7 +11,7 @@ const initialState: StateType = {
 		title: "",
 		body: "",
 		img: "",
-		category_id: "",
+		subcategory_id: "",
 	},
 };
 

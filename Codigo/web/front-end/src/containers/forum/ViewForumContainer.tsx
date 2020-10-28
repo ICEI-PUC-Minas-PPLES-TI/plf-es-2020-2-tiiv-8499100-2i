@@ -19,9 +19,9 @@ const ViewForumContainer = (props: RouterProps) => {
 
 	const forumsEls = forums.map((f: ForumType) => (
 		<ForumCard
-			key={f.forumId}
+			key={f.id}
 			forum={f}
-			onClick={() => props.history.push(`/forum/${f.forumId}`)}
+			onClick={() => props.history.push(`/forum/${f.id}`)}
 		/>
 	));
 

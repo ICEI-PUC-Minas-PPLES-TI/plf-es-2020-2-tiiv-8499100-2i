@@ -19,11 +19,11 @@ const ViewAdContainer = (props: RouteComponentProps) => {
 		dispatchHook(fetchAds());
 	};
 
-	const editAdsHandler = (adId: string) => {
+	const editAdsHandler = (adId: number) => {
 		props.history.push("/anuncio/editar/" + adId);
 	};
 
-	const deleteAdHandler = async (adId: string) => {
+	const deleteAdHandler = async (adId: number) => {
 		await deleteAdAPI(adId);
 		getAdsHandler();
 	};
@@ -33,7 +33,7 @@ const ViewAdContainer = (props: RouteComponentProps) => {
 	};
 
 	const adsEls = ads?.map((ad: AdType) => (
-		<div key={ad.ad_id}>
+		<div key={ad.id}>
 			<AdCard ad={ad} editAd={editAdsHandler} deleteAd={deleteAdHandler} />
 			<Spacer vertical={40} />
 		</div>

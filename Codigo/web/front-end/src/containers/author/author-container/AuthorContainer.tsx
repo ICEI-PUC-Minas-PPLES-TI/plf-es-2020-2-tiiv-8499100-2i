@@ -5,7 +5,7 @@ import {
 	fetchAuthor,
 	clearAuthor,
 } from "../../../store/author/actions";
-import { postAdAPI, putAdAPI } from "../../../api/api";
+import { postAuthorAPI, putAuthorAPI } from "../../../api/api";
 import { useParams, RouterProps } from "react-router";
 import Spinner from "../../../components/spinner/Spinner";
 import AuthorPage from "../../../pages/author-page/AuthorPage";
@@ -13,14 +13,14 @@ import AuthorPage from "../../../pages/author-page/AuthorPage";
 const AuthorContainer = (props: RouterProps) => {
 	const dispatchHook = useDispatch();
 
-	const { authorId } = useParams();
+	const { authorId } = useParams<any>();
 	const { author, status } = useSelector((state: any) => state.author);
 
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		if (authorId) {
-			dispatchHook(fetchAuthor(authorId));
+			dispatchHook(fetchAuthor(+authorId));
 		}
 
 		return () => {
@@ -47,15 +47,16 @@ const AuthorContainer = (props: RouterProps) => {
 	const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		setLoading(true);
+		debugger;
 
 		try {
 			if (!authorId) {
-				await postAdAPI(author);
+				await postAuthorAPI(author);
 				props.history.push("/autor");
 				return;
 			}
 
-			await putAdAPI(authorId, author);
+			await putAuthorAPI(+authorId, author);
 			props.history.push("/autor");
 		} catch {
 			alert("Ocorreu um erro. Tente novamente mais tarde.");

@@ -6,33 +6,43 @@ import Button from "../../button/Button";
 import Spacer from "../../../layout/spacer/Spacer";
 
 import * as classes from "./ForumPostCard.module.css";
+import { ForumPostType, ForumType } from "../../../types/forum";
 
-const ForumPostCard = () => {
+type PropsType = {
+	forum?: ForumType;
+	forumPost: ForumPostType;
+	deleteCallback: (forumPostId: number) => void;
+};
+
+const ForumPostCard = (props: PropsType) => {
 	return (
 		<Card padding={15}>
 			<Row justify="space-between">
 				<Column>
-					<strong className={classes["forumPostCard-title"]}>
-						Dúvida sobre GD&T
-					</strong>
+					{props.forum ? (
+						<strong className={classes["forumPostCard-title"]}>
+							{props.forum.title}
+						</strong>
+					) : null}
 					<Spacer vertical={10} />
 					<span className={classes["forumPostCard-author"]}>
-						Por: Lucas A. Gusmão
+						Por: {props.forumPost.user}
 					</span>
 				</Column>
-				<Button size="small" label="Excluir" buttonAttrs={{}} />
+				<Button
+					size="small"
+					label="Excluir"
+					buttonAttrs={{
+						onClick: () => props.deleteCallback(props.forumPost.id),
+					}}
+				/>
 			</Row>
 			<Spacer vertical={20} />
-			<Row>
-				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa
-				doloremque tempore iure atque culpa officia? Quia, aperiam! Ratione,
-				eum! Deserunt dicta ex natus qui voluptates velit cumque ipsam, expedita
-				consequuntur!
-			</Row>
+			<Row>{props.forumPost.body}</Row>
 			<Spacer vertical={20} />
 			<Row>
 				<span className={classes["forumPostCard-date"]}>
-					Postado em 02/09/2020
+					{/* Postado em {new Date(props.forumPost.date).toLocaleDateString()} */}
 				</span>
 			</Row>
 		</Card>

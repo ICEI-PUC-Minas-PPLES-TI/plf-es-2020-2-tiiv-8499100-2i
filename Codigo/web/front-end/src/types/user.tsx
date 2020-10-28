@@ -1,8 +1,8 @@
 export type UserType = {
-	business_name: string;
+	businessName: string;
 	document: string;
-	is_admin: string;
+	isAdmin: string;
 	name: string;
 	phone: string;
-	user_id: string;
+	uid: string;
 };

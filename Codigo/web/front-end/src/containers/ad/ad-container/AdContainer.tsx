@@ -9,14 +9,14 @@ import Spinner from "../../../components/spinner/Spinner";
 const AdContainer = (props: RouterProps) => {
 	const dispatchHook = useDispatch();
 
-	const { adId } = useParams();
+	const { adId } = useParams<any>();
 	const { ad, status } = useSelector((state: any) => state.ad);
 
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		if (adId) {
-			dispatchHook(fetchAd(adId));
+			dispatchHook(fetchAd(+adId));
 		}
 
 		return () => {
@@ -57,7 +57,7 @@ const AdContainer = (props: RouterProps) => {
 				return;
 			}
 
-			await putAdAPI(adId, ad);
+			await putAdAPI(+adId, ad);
 			props.history.push("/anuncio");
 		} catch {
 			alert("Ocorreu um erro. Tente novamente mais tarde.");

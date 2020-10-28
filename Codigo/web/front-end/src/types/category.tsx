@@ -1,21 +1,21 @@
 export type SymbolCategoryType = {
-	symbol_category_id: string;
+	id: number;
 	name: string;
 };
 
 export type SymbolSubcategoryType = {
-	symbol_sub_category_id: string;
+	id: number;
 	name: string;
-	category_id: string;
+	categoryId: number;
 };
 
 export type VideoCategoryType = {
-	video_category_id: string;
+	id: number;
 	name: string;
 };
 
 export type VideoSubcategoryType = {
-	video_sub_category_id: string;
+	id: number;
 	name: string;
-	category_id: string;
+	categoryId: number;
 };

@@ -13,7 +13,7 @@ import Spinner from "../../../components/spinner/Spinner";
 const SymbolCategoryContainer = (props: RouterProps) => {
 	const dispatchHook = useDispatch();
 
-	const { symbolCategoryId } = useParams();
+	const { symbolCategoryId } = useParams<any>();
 	const { symbolCategory, status } = useSelector(
 		(state: any) => state.symbolCategory
 	);
@@ -22,7 +22,7 @@ const SymbolCategoryContainer = (props: RouterProps) => {
 
 	useEffect(() => {
 		if (symbolCategoryId) {
-			dispatchHook(fetchSymbolCategory(symbolCategoryId));
+			dispatchHook(fetchSymbolCategory(+symbolCategoryId));
 		}
 
 		return () => {
@@ -51,7 +51,7 @@ const SymbolCategoryContainer = (props: RouterProps) => {
 				return;
 			}
 
-			await putSymbolCategoryAPI(symbolCategoryId, symbolCategory);
+			await putSymbolCategoryAPI(+symbolCategoryId, symbolCategory);
 			props.history.push("/categoria-simbolo");
 		} catch {
 			alert("Ocorreu um erro. Tente novamente mais tarde.");

@@ -4,8 +4,8 @@ import "firebase/database";
 import { YoutubeDataAPI } from "youtube-v3-api";
 import { PostType } from "../types/post";
 import { AuthorType } from "../types/author";
-import { GDTSymbolType } from "../types/symbol";
-import { formatPost, composeFormData } from "../utils/utils";
+import { SymbolType } from "../types/symbol";
+import { composeFormData } from "../utils/utils";
 import { VideoType } from "../types/video";
 import {
 	SymbolSubcategoryType,
@@ -20,9 +20,11 @@ import { ForumType } from "../types/forum";
 const authKey =
 	"Basic TmpkamNqWTBhSEpqTjJnNE1tNWtNak5xYTNNME4yTjFhMjpwbVpYSnVOM2RvTkdOeU5ETjRaV3QzYm1Ob2NtVnk=";
 
+const baseURL = "http://localhost:5000";
+
 const getReq = async (endpoint: string) => {
 	try {
-		const data = await fetch(`http://localhost:5000/${endpoint}`, {
+		const data = await fetch(`${baseURL}/${endpoint}`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -39,7 +41,7 @@ const getReq = async (endpoint: string) => {
 
 const postReq = async (endpoint: string, data: object) => {
 	try {
-		return fetch(`http://localhost:5000/${endpoint}`, {
+		return fetch(`${baseURL}/${endpoint}`, {
 			method: "POST",
 			headers: {
 				Authorization: "Basic " + authKey,
@@ -53,7 +55,7 @@ const postReq = async (endpoint: string, data: object) => {
 
 const putReq = async (endpoint: string, data: object) => {
 	try {
-		return fetch(`http://localhost:5000/${endpoint}`, {
+		return fetch(`${baseURL}/${endpoint}`, {
 			method: "PUT",
 			headers: {
 				Authorization: "Basic " + authKey,
@@ -67,7 +69,7 @@ const putReq = async (endpoint: string, data: object) => {
 
 const deleteReq = async (endpoint: string) => {
 	try {
-		return fetch(`http://localhost:5000/${endpoint}`, {
+		return fetch(`${baseURL}/${endpoint}`, {
 			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json",
@@ -97,11 +99,14 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // Auth
-export const auth = firebase.auth;
 export const realtimeDatabase = firebase.database;
 
+export const authenticate = (email: string, password: string) => {
+	return postReq("user/login", { email, password });
+};
+
 // Post
-export const getPostAPI = (postId: string): Promise<PostType> => {
+export const getPostAPI = (postId: number): Promise<PostType> => {
 	return getReq(`post/${postId}`);
 };
 
@@ -110,19 +115,21 @@ export const getPostsAPI = (): Promise<PostType[]> => {
 };
 
 export const postPostAPI = (data: PostType) => {
-	return postReq("post", formatPost(data));
+	console.log(data);
+	debugger;
+	return postReq("post", data);
 };
 
-export const putPostAPI = (postId: string, data: PostType) => {
+export const putPostAPI = (postId: number, data: PostType) => {
 	return putReq(`post/${postId}`, data);
 };
 
-export const deletePostAPI = (postId: string) => {
+export const deletePostAPI = (postId: number) => {
 	return deleteReq(`post/${postId}`);
 };
 
 // Author
-export const getAuthorAPI = (authorId: string): Promise<AuthorType> => {
+export const getAuthorAPI = (authorId: number): Promise<AuthorType> => {
 	return getReq(`author/${authorId}`);
 };
 
@@ -134,66 +141,66 @@ export const postAuthorAPI = (data: AuthorType) => {
 	return postReq("author", data);
 };
 
-export const putAuthorAPI = (authorId: string, data: AuthorType) => {
+export const putAuthorAPI = (authorId: number, data: AuthorType) => {
 	return putReq(`author/${authorId}`, data);
 };
 
-export const deleteAuthorAPI = (authorId: string) => {
+export const deleteAuthorAPI = (authorId: number) => {
 	return deleteReq(`author/${authorId}`);
 };
 
 // Symbol
-export const getSymbolAPI = (symbolId: string): Promise<GDTSymbolType> => {
+export const getSymbolAPI = (symbolId: number): Promise<SymbolType> => {
 	return getReq(`symbol/${symbolId}`);
 };
 
-export const getSymbolsAPI = (): Promise<GDTSymbolType[]> => {
+export const getSymbolsAPI = (): Promise<SymbolType[]> => {
 	return getReq("symbol");
 };
 
-export const postSymbolAPI = (data: GDTSymbolType) => {
+export const postSymbolAPI = (data: SymbolType) => {
 	return postReq("symbol", data);
 };
 
-export const putSymbolAPI = (symbolId: string, data: GDTSymbolType) => {
+export const putSymbolAPI = (symbolId: number, data: SymbolType) => {
 	return putReq(`symbol/${symbolId}`, data);
 };
 
-export const deleteSymbolAPI = (symbolId: string) => {
+export const deleteSymbolAPI = (symbolId: number) => {
 	return deleteReq(`symbol/${symbolId}`);
 };
 
 // Symbol Subcategory
 export const getSymbolSubcategoryAPI = (
-	symbolSubcategoryId: string
+	symbolSubcategoryId: number
 ): Promise<SymbolSubcategoryType> => {
-	return getReq(`symbol_sub_category/${symbolSubcategoryId}`);
+	return getReq(`symbol_subcategory/${symbolSubcategoryId}`);
 };
 
 export const getSymbolSubcategoriesAPI = (): Promise<
 	SymbolSubcategoryType[]
 > => {
-	return getReq("symbol_sub_category");
+	return getReq("symbol_subcategory");
 };
 
 export const postSymbolSubcategoryAPI = (data: SymbolSubcategoryType) => {
-	return postReq("symbol_sub_category", data);
+	return postReq("symbol_subcategory", data);
 };
 
 export const putSymbolSubcategoryAPI = (
-	symbolSubcategoryId: string,
+	symbolSubcategoryId: number,
 	data: SymbolSubcategoryType
 ) => {
-	return putReq(`symbol_sub_category/${symbolSubcategoryId}`, data);
+	return putReq(`symbol_subcategory/${symbolSubcategoryId}`, data);
 };
 
-export const deleteSymbolSubcategoryAPI = (symbolSubcategoryId: string) => {
-	return deleteReq(`symbol_sub_category/${symbolSubcategoryId}`);
+export const deleteSymbolSubcategoryAPI = (symbolSubcategoryId: number) => {
+	return deleteReq(`symbol_subcategory/${symbolSubcategoryId}`);
 };
 
 // Symbol Category
 export const getSymbolCategoryAPI = (
-	symbolCategoryId: string
+	symbolCategoryId: number
 ): Promise<SymbolCategoryType> => {
 	return getReq(`symbol_category/${symbolCategoryId}`);
 };
@@ -207,18 +214,18 @@ export const postSymbolCategoryAPI = (data: SymbolCategoryType) => {
 };
 
 export const putSymbolCategoryAPI = (
-	symbolCategoryId: string,
+	symbolCategoryId: number,
 	data: SymbolCategoryType
 ) => {
 	return putReq(`symbol_category/${symbolCategoryId}`, data);
 };
 
-export const deleteSymbolCategoryAPI = (symbolCategoryId: string) => {
+export const deleteSymbolCategoryAPI = (symbolCategoryId: number) => {
 	return deleteReq(`symbol_category/${symbolCategoryId}`);
 };
 
 // Video
-export const getVideoAPI = (videoId: string): Promise<VideoType> => {
+export const getVideoAPI = (videoId: number): Promise<VideoType> => {
 	return getReq(`video/${videoId}`);
 };
 
@@ -230,17 +237,17 @@ export const postVideoAPI = (data: VideoType) => {
 	return postReq("video", data);
 };
 
-export const putVideoAPI = (videoId: string, data: VideoType) => {
+export const putVideoAPI = (videoId: number, data: VideoType) => {
 	return putReq(`video/${videoId}`, data);
 };
 
-export const deleteVideoAPI = (videoId: string) => {
+export const deleteVideoAPI = (videoId: number) => {
 	return deleteReq(`video/${videoId}`);
 };
 
 // Video Category
 export const getVideoCategoryAPI = (
-	videoCategoryId: string
+	videoCategoryId: number
 ): Promise<VideoCategoryType> => {
 	return getReq(`video_category/${videoCategoryId}`);
 };
@@ -254,44 +261,44 @@ export const postVideoCategoryAPI = (data: VideoCategoryType) => {
 };
 
 export const putVideoCategoryAPI = (
-	videoCategoryId: string,
+	videoCategoryId: number,
 	data: VideoCategoryType
 ) => {
 	return putReq(`video_category/${videoCategoryId}`, data);
 };
 
-export const deleteVideoCategoryAPI = (videoCategoryId: string) => {
+export const deleteVideoCategoryAPI = (videoCategoryId: number) => {
 	return deleteReq(`video_category/${videoCategoryId}`);
 };
 
 // Video Category
 export const getVideoSubcategoryAPI = (
-	videoSubcategoryId: string
+	videoSubcategoryId: number
 ): Promise<VideoSubcategoryType> => {
-	return getReq(`video_sub_category/${videoSubcategoryId}`);
+	return getReq(`video_subcategory/${videoSubcategoryId}`);
 };
 
 export const getVideoSubcategoriesAPI = (): Promise<VideoCategoryType[]> => {
-	return getReq("video_sub_category");
+	return getReq("video_subcategory");
 };
 
 export const postVideoSubcategoryAPI = (data: VideoSubcategoryType) => {
-	return postReq("video_sub_category", data);
+	return postReq("video_subcategory", data);
 };
 
 export const putVideoSubcategoryAPI = (
-	videoSubcategoryId: string,
+	videoSubcategoryId: number,
 	data: VideoSubcategoryType
 ) => {
-	return putReq(`video_sub_category/${videoSubcategoryId}`, data);
+	return putReq(`video_subcategory/${videoSubcategoryId}`, data);
 };
 
-export const deleteVideoSubcategoryAPI = (videoSubcategoryId: string) => {
-	return deleteReq(`video_sub_category/${videoSubcategoryId}`);
+export const deleteVideoSubcategoryAPI = (videoSubcategoryId: number) => {
+	return deleteReq(`video_subcategory/${videoSubcategoryId}`);
 };
 
 // Ad
-export const getAdAPI = (adId: string): Promise<AdType> => {
+export const getAdAPI = (adId: number): Promise<AdType> => {
 	return getReq(`ad/${adId}`);
 };
 
@@ -303,11 +310,11 @@ export const postAdAPI = (data: AdType) => {
 	return postReq("ad", data);
 };
 
-export const putAdAPI = (adId: string, data: AdType) => {
+export const putAdAPI = (adId: number, data: AdType) => {
 	return putReq(`ad/${adId}`, data);
 };
 
-export const deleteAdAPI = (adId: string) => {
+export const deleteAdAPI = (adId: number) => {
 	return deleteReq(`ad/${adId}`);
 };
 
@@ -320,24 +327,10 @@ export const getForumAPI = (forumId: number): Promise<ForumType[]> => {
 	return getReq(`forum/${forumId}`);
 };
 
-export const deleteForumAPI = (forumId: string) => {
+export const deleteForumAPI = (forumId: number) => {
 	return deleteReq(`forum/${forumId}`);
 };
 
-// Forum Post
-export const getForumPostsAPI = (): Promise<any[]> => {
-	return getReq("forum_post");
-};
-
-export const deleteForumPostAPI = (forumId: string) => {
-	return deleteReq(`forum/${forumId}`);
-};
-
-// User
-export const getUserAPI = (uid: string): Promise<UserType> => {
-	return getReq(`user/${uid}`);
-};
-
-export const getUsersAPI = (): Promise<UserType[]> => {
-	return getReq(`user`);
+export const deleteForumPostAPI = (forumPostId: number) => {
+	return deleteReq(`forum/${forumPostId}/delete_post`);
 };

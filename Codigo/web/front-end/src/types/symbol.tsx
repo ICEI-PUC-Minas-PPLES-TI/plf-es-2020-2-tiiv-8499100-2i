@@ -1,7 +1,7 @@
-export type GDTSymbolType = {
-	symbol_id: string;
+export type SymbolType = {
+	id: number;
 	title: string;
 	body: string;
 	img?: string;
-	sub_category_id: string;
+	categoryId: number;
 };

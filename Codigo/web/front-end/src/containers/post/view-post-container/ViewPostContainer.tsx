@@ -22,11 +22,11 @@ const ViewPostContainer = (props: RouteComponentProps) => {
 		dispatchHook(fetchPosts());
 	};
 
-	const editPostHandler = (postId: string) => {
+	const editPostHandler = (postId: number) => {
 		props.history.push("/post/editar/" + postId);
 	};
 
-	const deletePostHandler = async (postId: string) => {
+	const deletePostHandler = async (postId: number) => {
 		await deletePostAPI(postId);
 		getPostsHandler();
 	};
@@ -36,7 +36,7 @@ const ViewPostContainer = (props: RouteComponentProps) => {
 	};
 
 	const postsEls = posts?.map((post: PostType) => (
-		<div key={post.post_id}>
+		<div key={post.id}>
 			<PostCard
 				post={post}
 				editPost={editPostHandler}

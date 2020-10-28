@@ -21,18 +21,22 @@ const ForumCard = (props: PropsType) => {
 			<Spacer vertical={5} />
 			<Row>
 				<span className={classes["forumCard-info"]}>
-					Criado por Lucas Gusmão · 01/09/2020
+					Criado por {props.forum.user} ·{" "}
+					{/* {new Date(props.forum.originalPost.date).toLocaleDateString()} */}
 				</span>
 			</Row>
 			<Spacer vertical={5} />
 			<Row>
 				<span className={classes["forumCard-info"]}>
-					Ultima atualização em 02/09/2020
+					Ultima atualização em{" "}
+					{/* {new Date(props.forum.originalPost.date).toLocaleDateString()} */}
 				</span>
 			</Row>
 			<Spacer vertical={5} />
 			<Row>
-				<span className={classes["forumCard-info"]}>8 respostas</span>
+				<span className={classes["forumCard-info"]}>
+					{props.forum.forumPosts.length} respostas
+				</span>
 			</Row>
 		</Card>
 	);

@@ -1,12 +1,4 @@
-import { PostType } from "../types/post";
 import { realtimeDatabase } from "../api/api";
-
-export const formatPost = (post: PostType) => {
-	return {
-		...post,
-		date: post.date?.toISOString().split("T")[0] ?? post.date,
-	};
-};
 
 export const composeFormData = (obj: object) => {
 	const formData = new FormData();
@@ -90,32 +82,23 @@ export const getViewsCount = (
 						let itemsArray = objectToArray(viewSnapshot.val());
 						if (initDate) {
 							itemsArray = itemsArray.filter((item) => {
-								const itemDate = new Date(
-									item.date + "T00:00:00"
-								).getTime();
+								const itemDate = new Date(item.date + "T00:00:00").getTime();
 								return itemDate >= initDate.getTime();
 							});
 						}
 						if (endDate) {
 							itemsArray = itemsArray.filter((item) => {
-								const itemDate = new Date(
-									item.date + "T00:00:00"
-								).getTime();
+								const itemDate = new Date(item.date + "T00:00:00").getTime();
 								return itemDate <= endDate.getTime();
 							});
 						}
 						if (userId) {
-							itemsArray = itemsArray.filter(
-								(item) => item.user_id === userId
-							);
+							itemsArray = itemsArray.filter((item) => item.user_id === userId);
 						}
 
 						const currStatItems: any[] = [];
 
-						flattenByKey(
-							itemsArray,
-							`${selectedOption}_id`
-						).forEach((item) => {
+						flattenByKey(itemsArray, `${selectedOption}_id`).forEach((item) => {
 							const id = item[`${selectedOption}_id`];
 							const itemValue = itemSnapshot.val()[id];
 							const viewCount = countByKey(
@@ -154,24 +137,18 @@ export const getCalculatorViewsCount = (
 				let itemsArray = objectToArray(viewSnapshot.val());
 				if (initDate) {
 					itemsArray = itemsArray.filter((item) => {
-						const itemDate = new Date(
-							item.date + "T00:00:00"
-						).getTime();
+						const itemDate = new Date(item.date + "T00:00:00").getTime();
 						return itemDate >= initDate.getTime();
 					});
 				}
 				if (endDate) {
 					itemsArray = itemsArray.filter((item) => {
-						const itemDate = new Date(
-							item.date + "T00:00:00"
-						).getTime();
+						const itemDate = new Date(item.date + "T00:00:00").getTime();
 						return itemDate <= endDate.getTime();
 					});
 				}
 				if (userId) {
-					itemsArray = itemsArray.filter(
-						(item) => item.user_id === userId
-					);
+					itemsArray = itemsArray.filter((item) => item.user_id === userId);
 				}
 
 				itemsArray.forEach((item) => {

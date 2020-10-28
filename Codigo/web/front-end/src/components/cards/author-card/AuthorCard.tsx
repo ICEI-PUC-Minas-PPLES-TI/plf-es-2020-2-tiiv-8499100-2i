@@ -22,7 +22,7 @@ const AuthorCard = (props: PropsType) => (
 				label="editar"
 				size="small"
 				buttonAttrs={{
-					onClick: () => props.editAuthor(props.author.author_id),
+					onClick: () => props.editAuthor(props.author.id),
 				}}
 			/>
 			<Spacer horizontal={20} />
@@ -30,7 +30,7 @@ const AuthorCard = (props: PropsType) => (
 				label="excluir"
 				size="small"
 				buttonAttrs={{
-					onClick: () => props.deleteAuthor(props.author.author_id),
+					onClick: () => props.deleteAuthor(props.author.id),
 				}}
 			/>
 		</Row>

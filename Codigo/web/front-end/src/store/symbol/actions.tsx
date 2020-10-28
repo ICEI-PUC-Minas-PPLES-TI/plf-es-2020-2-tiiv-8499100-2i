@@ -1,4 +1,4 @@
-import { GDTSymbolType } from "../../types/symbol";
+import { SymbolType } from "../../types/symbol";
 import { getSymbolAPI } from "../../api/api";
 
 export enum SymbolActionsEnum {
@@ -13,7 +13,7 @@ export const fetchSymbolBegin = () => ({
 	type: SymbolActionsEnum.FETCH_SYMBOL_BEGIN,
 });
 
-export const fetchSymbolSuccess = (symbol: GDTSymbolType) => ({
+export const fetchSymbolSuccess = (symbol: SymbolType) => ({
 	type: SymbolActionsEnum.FETCH_SYMBOL_SUCCESS,
 	symbol,
 });
@@ -31,7 +31,7 @@ export const clearSymbol = () => ({
 	type: SymbolActionsEnum.CLEAR_SYMBOL,
 });
 
-export const fetchSymbol = (symbolId: string) => {
+export const fetchSymbol = (symbolId: number) => {
 	return async (dispatch: any) => {
 		dispatch(fetchSymbolBegin());
 

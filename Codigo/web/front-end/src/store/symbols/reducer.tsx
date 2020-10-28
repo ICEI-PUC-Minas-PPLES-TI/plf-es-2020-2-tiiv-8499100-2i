@@ -1,9 +1,9 @@
-import { GDTSymbolType } from "../../types/symbol";
+import { SymbolType } from "../../types/symbol";
 import { SymbolsActionsEnum } from "./actions";
 
 type StateType = {
 	status: string;
-	symbols: GDTSymbolType[];
+	symbols: SymbolType[];
 };
 
 const initialState: StateType = {

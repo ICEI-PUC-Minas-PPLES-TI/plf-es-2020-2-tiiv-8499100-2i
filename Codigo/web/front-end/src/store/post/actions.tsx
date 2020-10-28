@@ -31,7 +31,7 @@ export const clearPost = () => ({
 	type: PostActionsEnum.CLEAR_POST,
 });
 
-export const fetchPost = (postId: string) => {
+export const fetchPost = (postId: number) => {
 	return async (dispatch: any) => {
 		dispatch(fetchPostBegin());
 

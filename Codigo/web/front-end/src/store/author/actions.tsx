@@ -31,7 +31,7 @@ export const clearAuthor = () => ({
 	type: AuthorActionsEnum.CLEAR_AUTHOR,
 });
 
-export const fetchAuthor = (authorId: string) => {
+export const fetchAuthor = (authorId: number) => {
 	return async (dispatch: any) => {
 		dispatch(fetchAuthorBegin());
 

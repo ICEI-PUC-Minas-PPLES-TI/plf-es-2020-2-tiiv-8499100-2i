@@ -9,6 +9,9 @@ const initialState: StateType = {
 	status: "",
 	video: {
 		youtube_url: "",
+		title: "",
+		date: "",
+		subcategory_id: "",
 	},
 };
 

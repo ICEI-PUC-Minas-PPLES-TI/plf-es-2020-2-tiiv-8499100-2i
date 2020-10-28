@@ -6,7 +6,7 @@ import ForumPostCard from "../../components/cards/forum-post-card/ForumPostCard"
 import { useDispatch, useSelector } from "react-redux";
 import { RouterProps, useParams } from "react-router";
 import { fetchForum } from "../../store/forum/actions";
-import { deleteForumAPI } from "../../api/api";
+import { deleteForumAPI, deleteForumPostAPI, getForumAPI } from "../../api/api";
 import DeleteButton from "../../components/delete-button/DeleteButton";
 
 const ViewForumPostsContainer = (props: RouterProps) => {
@@ -16,13 +16,17 @@ const ViewForumPostsContainer = (props: RouterProps) => {
 
 	useEffect(() => {
 		if (typeof forumId === "string") {
-			dispatchHook(fetchForum(+forumId));
+			getForum();
 		}
 	}, [dispatchHook, forumId]);
 
+	const getForum = () => {
+		dispatchHook(fetchForum(+forumId));
+	};
+
 	const deleteForum = async () => {
 		try {
-			await deleteForumAPI(forumId);
+			await deleteForumAPI(+forumId);
 			alert("Fórum deletado com sucesso");
 			props.history.push("/forum");
 		} catch (error) {
@@ -30,15 +34,33 @@ const ViewForumPostsContainer = (props: RouterProps) => {
 		}
 	};
 
-	const forumsEls = [
-		<ForumPostCard />,
-		<Spacer vertical={30} />,
-		<ForumPostCard />,
-		<Spacer vertical={30} />,
-		<ForumPostCard />,
-		<Spacer vertical={30} />,
-		<ForumPostCard />,
-	];
+	const deleteForumPost = async (forumPostId: number) => {
+		try {
+			await deleteForumPostAPI(forumPostId);
+			alert("Post deletado com sucesso");
+			getForum();
+		} catch (error) {
+			alert("Ocorreu um erro ao deletar o fórum. Tente novamente mais tarde.");
+		}
+	};
+
+	const firstEl = forum ? (
+		<>
+			<ForumPostCard
+				forumPost={forum.originalPost}
+				forum={forum}
+				deleteCallback={deleteForumPost}
+			/>
+			<Spacer vertical={30} />
+		</>
+	) : null;
+
+	const forumEls = forum?.forumPosts.map((fp) => (
+		<React.Fragment key={fp.id}>
+			<ForumPostCard forumPost={fp} deleteCallback={deleteForumPost} />
+			<Spacer vertical={30} />
+		</React.Fragment>
+	));
 
 	return (
 		<div>
@@ -49,7 +71,7 @@ const ViewForumPostsContainer = (props: RouterProps) => {
 			{status === "loading" ? (
 				<Spinner />
 			) : status === "success" ? (
-				forumsEls
+				[firstEl, forumEls]
 			) : status === "error" ? (
 				"error"
 			) : null}

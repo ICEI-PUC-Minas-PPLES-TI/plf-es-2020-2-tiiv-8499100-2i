@@ -18,6 +18,7 @@ type PropsType = {
 	onChangeInput: (
 		event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
 	) => void;
+	onUpdateInfo: (data: { key: string; value: string }) => void;
 	type: "new" | "update";
 	video: VideoType;
 	videoSubcategories: VideoSubcategoryType[];
@@ -29,8 +30,8 @@ const VideoPage = (props: PropsType) => {
 	const [ytId, setYtId] = useState("");
 
 	useEffect(() => {
-		if (props.video.youtube_url) {
-			fetchYoutubeInfo(props.video.youtube_url);
+		if (props.video.youtubeUrl) {
+			fetchYoutubeInfo(props.video.youtubeUrl);
 
 			return;
 		}
@@ -44,10 +45,10 @@ const VideoPage = (props: PropsType) => {
 			const ytSearch = (await youtubeAPI.searchVideo(ytId)) as any;
 
 			const title = ytSearch.items[0].snippet.title ?? "";
-			const date = ytSearch.items[0].snippet.publishedAt ?? "";
+			const date = ytSearch.items[0].snippet.publishedAt.split("T")[0] ?? "";
 
-			setTitle(title);
-			setDate(date);
+			props.onUpdateInfo({ key: "title", value: title });
+			props.onUpdateInfo({ key: "date", value: date });
 			setYtId(ytId);
 		} catch {
 			setTitle("");
@@ -65,18 +66,6 @@ const VideoPage = (props: PropsType) => {
 
 	return (
 		<form onSubmit={props.onSubmit}>
-			<input
-				type="hidden"
-				id="title"
-				value={title}
-				onChange={props.onChangeInput}
-			/>
-			<input
-				type="hidden"
-				id="date"
-				value={date}
-				onChange={props.onChangeInput}
-			/>
 			<Column align="center">
 				<Row>
 					<Video videoID={ytId} />
@@ -89,7 +78,7 @@ const VideoPage = (props: PropsType) => {
 							placeholder:
 								"Exemplo: https://www.youtube.com/watch?v=dQw4w9WgXcQ",
 							onChange: onChangeInputHandler,
-							value: props.video.youtube_url,
+							value: props.video.youtubeUrl,
 						}}
 					/>
 				</Row>
@@ -99,12 +88,12 @@ const VideoPage = (props: PropsType) => {
 						label="Selecione uma subcategoria..."
 						options={props.videoSubcategories?.map((c) => ({
 							label: c.name,
-							value: c.video_sub_category_id,
+							value: c.id,
 						}))}
 						inputAttrs={{
-							id: "category_id",
+							id: "subcategory_id",
 							onChange: props.onChangeInput,
-							defaultValue: props.video.category_id ?? "",
+							defaultValue: props.video.categoryId ?? "",
 						}}
 					/>
 				</Row>

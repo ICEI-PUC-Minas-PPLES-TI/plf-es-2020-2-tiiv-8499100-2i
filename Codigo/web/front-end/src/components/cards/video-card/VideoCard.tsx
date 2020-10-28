@@ -10,8 +10,8 @@ import * as classes from "./VideoCard.module.css";
 
 type PropsType = {
 	video: VideoType;
-	editVideo: (videoId: string) => void;
-	deleteVideo: (videoId: string) => void;
+	editVideo: (videoId: number) => void;
+	deleteVideo: (videoId: number) => void;
 };
 
 const getThumbnailURL = (url: string) => {
@@ -26,21 +26,19 @@ const VideoCard = (props: PropsType) => (
 		<div className={classes["video-thumbnailContainer"]}>
 			<img
 				className={classes["video-thumbnail"]}
-				src={getThumbnailURL(props.video.youtube_url)}
+				src={getThumbnailURL(props.video.youtubeUrl)}
 				alt=""
 			/>
 		</div>
 		<div className={classes["videoCard-body"]}>
-			<strong className={classes["video-title"]}>
-				{props.video.title}
-			</strong>
+			<strong className={classes["video-title"]}>{props.video.title}</strong>
 			<Spacer vertical={15} />
 			<Row>
 				<Button
 					label="editar"
 					size="small"
 					buttonAttrs={{
-						onClick: () => props.editVideo(props.video.video_id),
+						onClick: () => props.editVideo(props.video.id),
 					}}
 				/>
 				<Spacer horizontal="flex" />
@@ -48,7 +46,7 @@ const VideoCard = (props: PropsType) => (
 					label="excluir"
 					size="small"
 					buttonAttrs={{
-						onClick: () => props.deleteVideo(props.video.video_id),
+						onClick: () => props.deleteVideo(props.video.id),
 					}}
 				/>
 			</Row>

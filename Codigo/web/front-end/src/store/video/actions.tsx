@@ -31,7 +31,7 @@ export const clearVideo = () => ({
 	type: VideoActionsEnum.CLEAR_VIDEO,
 });
 
-export const fetchVideo = (videoId: string) => {
+export const fetchVideo = (videoId: number) => {
 	return async (dispatch: any) => {
 		dispatch(fetchVideoBegin());
 

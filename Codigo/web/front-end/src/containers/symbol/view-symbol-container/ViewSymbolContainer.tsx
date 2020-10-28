@@ -9,7 +9,7 @@ import Title from "../../../components/title/Title";
 import Spacer from "../../../layout/spacer/Spacer";
 import Spinner from "../../../components/spinner/Spinner";
 import SymbolCard from "../../../components/cards/symbol-card/SymbolCard";
-import { GDTSymbolType } from "../../../types/symbol";
+import { SymbolType } from "../../../types/symbol";
 import { fetchSymbols } from "../../../store/symbols/actions";
 
 import * as classes from "./ViewSymbolContainer.module.css";
@@ -23,11 +23,11 @@ const ViewSymbolContainer = (props: RouteComponentProps) => {
 		dispatchHook(fetchPosts());
 	};
 
-	const editSymbolHandler = (symbolId: string) => {
+	const editSymbolHandler = (symbolId: number) => {
 		props.history.push("/simbolo/editar/" + symbolId);
 	};
 
-	const deleteSymbolHandler = async (symbolId: string) => {
+	const deleteSymbolHandler = async (symbolId: number) => {
 		await deleteSymbolAPI(symbolId);
 		getSymbolHandler();
 	};
@@ -36,8 +36,8 @@ const ViewSymbolContainer = (props: RouteComponentProps) => {
 		props.history.push("/simbolo/novo");
 	};
 
-	const symbolsEls = symbols?.map((symbol: GDTSymbolType) => (
-		<div key={symbol.symbol_id}>
+	const symbolsEls = symbols?.map((symbol: SymbolType) => (
+		<div key={symbol.id}>
 			<SymbolCard
 				symbol={symbol}
 				editSymbol={editSymbolHandler}

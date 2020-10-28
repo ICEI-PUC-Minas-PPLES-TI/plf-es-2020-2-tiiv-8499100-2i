@@ -1,4 +1,4 @@
-import { GDTSymbolType } from "../../types/symbol";
+import { SymbolType } from "../../types/symbol";
 import { getSymbolsAPI } from "../../api/api";
 
 export enum SymbolsActionsEnum {
@@ -11,7 +11,7 @@ export const fetchSymbolsBegin = () => ({
 	type: SymbolsActionsEnum.FETCH_SYMBOLS_BEGIN,
 });
 
-export const fetchSymbolsSuccess = (symbols: GDTSymbolType[]) => ({
+export const fetchSymbolsSuccess = (symbols: SymbolType[]) => ({
 	type: SymbolsActionsEnum.FETCH_SYMBOLS_SUCCESS,
 	symbols,
 });

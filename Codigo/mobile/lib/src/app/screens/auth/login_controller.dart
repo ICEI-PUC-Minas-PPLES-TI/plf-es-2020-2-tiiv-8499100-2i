@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:inteligenciaindustrialapp/src/app/models/dto/user/UserDTO.dart';
+import 'package:inteligenciaindustrialapp/src/app/providers/user_provider.dart';
 import 'package:inteligenciaindustrialapp/src/app/services/service_status_data.dart';
 import 'package:inteligenciaindustrialapp/src/app/services/user_service.dart';
+import 'package:inteligenciaindustrialapp/src/app/utils/extensions/user_extension.dart';
 import 'package:mobx/mobx.dart';
 
 part 'login_controller.g.dart';
@@ -13,6 +15,8 @@ abstract class _LoginControllerBase with Store {
   UserService _userService = UserService();
 
   ServiceStatusData<UserDTO> user = ServiceStatusData();
+
+  UserProvider userProvider = UserProvider();
 
   @observable
   String email;
@@ -71,6 +75,11 @@ abstract class _LoginControllerBase with Store {
 
     return this._userService.login(user: data).then((response) {
       user.setDone(response);
+
+      if (response != null) {
+        userProvider.saveUser(response.toEntity()..logged = true);
+      }
+
       return true;
     }).catchError((error) {
       user.setError(error);

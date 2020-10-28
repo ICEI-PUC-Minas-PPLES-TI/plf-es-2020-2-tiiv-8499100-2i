@@ -5,7 +5,7 @@ part 'symbol_subcategory_entity.g.dart';
 @HiveType(typeId: 3)
 class SymbolSubcategoryEntity extends HiveObject {
   @HiveField(0)
-  String id;
+  num id;
 
   @HiveField(1)
   String name;

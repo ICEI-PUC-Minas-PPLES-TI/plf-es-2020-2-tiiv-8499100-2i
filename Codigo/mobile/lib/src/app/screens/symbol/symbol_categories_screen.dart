@@ -39,7 +39,8 @@ class SymbolCategoriesScreen extends StatelessWidget {
                     title: category.name,
                     top: index == 0,
                     action: () {
-                      symbolController.getSymbolsSubcategories(category.id);
+                      symbolController
+                          .getSymbolsSubcategories(category.id.toString());
                       homeController.setBody(SymbolSubcategoriesScreen());
                     });
               },

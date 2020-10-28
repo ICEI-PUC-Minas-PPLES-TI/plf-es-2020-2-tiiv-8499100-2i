@@ -14,11 +14,14 @@ import 'package:inteligenciaindustrialapp/src/app/models/entities/video/subcateg
 import 'package:inteligenciaindustrialapp/src/app/models/entities/video/video_entity.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/auth/login_controller.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/auth/register_controller.dart';
+import 'package:inteligenciaindustrialapp/src/app/screens/forum/forum_controller.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/home/home_controller.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/home/home_screen.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/symbol/symbol_controller.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/video/video_controller.dart';
+import 'package:inteligenciaindustrialapp/src/app/utils/extensions/user_extension.dart';
 import 'package:inteligenciaindustrialapp/src/app/utils/library/helpers/global.dart';
+import 'package:inteligenciaindustrialapp/src/app/utils/network/connection_controller.dart';
 import 'package:inteligenciaindustrialapp/src/app/utils/network/network_service.dart';
 import 'package:inteligenciaindustrialapp/src/app/utils/translate/global_translations.dart';
 import 'package:inteligenciaindustrialapp/src/app/utils/translate/preferences.dart';
@@ -50,6 +53,11 @@ Future main() async {
 
   intro = await preferences.getViewedIntro();
 
+  UserEntity userEntity = userController.userProvider.loggedUser;
+  if (userEntity != null) {
+    userController.user.setDone(userEntity.toDTO());
+  }
+
   runApp(MyApp());
 
   Intl.defaultLocale = 'pt';
@@ -79,8 +87,10 @@ _registerStores() {
   getIt.registerSingleton(HomeController());
   getIt.registerSingleton(SymbolController());
   getIt.registerSingleton(VideoController());
+  getIt.registerSingleton(ForumController());
   getIt.registerSingleton(RegisterController());
   getIt.registerSingleton(LoginController());
+  getIt.registerSingleton(ConnectionController());
 }
 
 _configDatabase() async {
@@ -95,6 +105,12 @@ _configDatabase() async {
     ..registerAdapter(VideoCategoryEntityAdapter()) //5
     ..registerAdapter(VideoSubcategoryEntityAdapter()) //6
     ..registerAdapter(UserEntityAdapter()); //7
+
+  await Hive.openBox<PostEntity>('posts');
+  await Hive.openBox<SymbolEntity>('symbols');
+  await Hive.openBox<SymbolCategoryEntity>('symbols_categories');
+  await Hive.openBox<SymbolSubcategoryEntity>('symbols_subcategories');
+  await Hive.openBox<UserEntity>('users');
 
   /*await Hive.openBox<EmployerEntity>('employers');
   await Hive.openBox<EmployeeEntity>('employees');

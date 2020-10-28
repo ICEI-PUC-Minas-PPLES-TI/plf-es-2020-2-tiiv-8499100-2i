@@ -146,7 +146,6 @@ abstract class _RegisterControllerBase with Store {
       'document': cpfCnpj ?? '',
       'phone': phone,
       'business_name': company ?? '',
-      'is_admin': false,
     });
 
     this._userService.registerUser(user: data).then((response) {

@@ -1,5 +1,5 @@
+import 'package:dio/dio.dart';
 import 'package:inteligenciaindustrialapp/src/app/models/dto/post/PostDTO.dart';
-import 'package:inteligenciaindustrialapp/src/app/models/dto/statistic/PostStatisticDTO.dart';
 import 'package:inteligenciaindustrialapp/src/app/utils/library/helpers/global.dart';
 import 'package:inteligenciaindustrialapp/src/app/utils/network/network_service.dart';
 
@@ -19,9 +19,11 @@ class PostService extends BaseService {
   }
 
   sendStatistic({String postId}) {
-    PostStatisticDTO statisticDTO = PostStatisticDTO(
-        post_id: postId, user_id: userController.user.getData?.id ?? '');
-    this.request(HttpMethod.POST, 'post_view',
-        headers: headers, body: statisticDTO.toJson());
+    FormData data = FormData.fromMap({
+      'uid': userController.user.getData?.uid,
+      'post_id': postId,
+    });
+
+    this.request(HttpMethod.POST, 'post_view', headers: headers, body: data);
   }
 }

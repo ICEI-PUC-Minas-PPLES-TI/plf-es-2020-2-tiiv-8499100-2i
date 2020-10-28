@@ -67,7 +67,8 @@ class SymbolScreen extends StatelessWidget {
                     SymbolDTO symbol = symbolController.symbols.getData[index];
                     return CustomContainer(
                       onTap: () {
-                        symbolController.sendStatistic(symbolId: symbol.id);
+                        symbolController.sendStatistic(
+                            symbolId: symbol.id.toString());
                         frwkNavigator.navigate(
                             SymbolDetailScreen(
                               symbol: symbol,
@@ -83,8 +84,8 @@ class SymbolScreen extends StatelessWidget {
                             alignment: Alignment.topCenter, // add this
                             placeholder: 'image',
                             image: symbol.img,
-                            fit: BoxFit.fitWidth,
-                            height: 150,
+                            fit: BoxFit.fill,
+                            height: 120,
                           ),
                           Text(symbol.title),
                         ],

@@ -5,9 +5,9 @@ part 'VideoStatisticDTO.g.dart';
 @JsonSerializable()
 class VideoStatisticDTO {
   String video_id;
-  String user_id;
+  String uid;
 
-  VideoStatisticDTO({this.video_id, this.user_id});
+  VideoStatisticDTO({this.video_id, this.uid});
 
   factory VideoStatisticDTO.fromJson(Map<String, dynamic> json) =>
       _$VideoStatisticDTOFromJson(json);

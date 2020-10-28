@@ -4,8 +4,7 @@ part 'SymbolSubcategoryDTO.g.dart';
 
 @JsonSerializable()
 class SymbolSubcategoryDTO {
-  @JsonKey(name: 'symbol_sub_category_id')
-  String id;
+  num id;
   String name;
 
   SymbolSubcategoryDTO({this.id, this.name});

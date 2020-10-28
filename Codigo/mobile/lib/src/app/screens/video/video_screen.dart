@@ -7,6 +7,7 @@ import 'package:inteligenciaindustrialapp/src/app/screens/video/video_categories
 import 'package:inteligenciaindustrialapp/src/app/utils/library/helpers/global.dart';
 import 'package:inteligenciaindustrialapp/src/app/utils/styles/colors_style.dart';
 import 'package:inteligenciaindustrialapp/src/configs/app_config.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class VideoScreen extends StatelessWidget {
   @override
@@ -92,9 +93,13 @@ class VideoScreen extends StatelessWidget {
   }
 
   _buildVideoContainer(VideoDTO video, BuildContext context) {
+    if (video.isAd) {
+      return _buildAd(video);
+    }
+
     return CustomContainer(
         onTap: () {
-          videoController.sendStatistic(videoId: video.id);
+          videoController.sendStatistic(videoId: video.id.toString());
           FlutterYoutube.playYoutubeVideoByUrl(
             apiKey: APP_CONFIG.API_YOUTUBE,
             videoUrl: video.youtubeUrl,
@@ -118,7 +123,7 @@ class VideoScreen extends StatelessWidget {
                     alignment: Alignment.topCenter, // add this
                     placeholder: 'image',
                     image: video != null
-                        ? video.img
+                        ? video.imgVideo
                         : 'https://firebasestorage.googleapis.com/v0/b/ii-tec.appspot.com/o/img%2Foleo-gas.jpeg?alt=media&token=19de4a94-840c-4e8e-b712-b43bfdb5a1bc',
                     fit: BoxFit.fitWidth,
                   ),
@@ -144,6 +149,33 @@ class VideoScreen extends StatelessWidget {
                 ],
               ),
             ),
+          ],
+        ));
+  }
+
+  _buildAd(VideoDTO videoDTO) {
+    return CustomContainer(
+        onTap: () async {
+          if (await canLaunch(videoDTO.url)) {
+            await launch(videoDTO.url);
+          }
+        },
+        radius: 2,
+        color: ColorsStyle.background,
+        shadowColor: ColorsStyle.grayDark,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            videoDTO.img == null
+                ? SizedBox.shrink()
+                : FadeInImage.assetNetwork(
+                    alignment: Alignment.topCenter, // add this
+                    placeholder: 'image',
+                    image: videoDTO != null
+                        ? videoDTO.img
+                        : 'https://firebasestorage.googleapis.com/v0/b/ii-tec.appspot.com/o/img%2Foleo-gas.jpeg?alt=media&token=19de4a94-840c-4e8e-b712-b43bfdb5a1bc',
+                    fit: BoxFit.fitWidth,
+                  ),
           ],
         ));
   }

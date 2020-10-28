@@ -8,13 +8,13 @@ part of 'SymbolCategoryDTO.dart';
 
 SymbolCategoryDTO _$SymbolCategoryDTOFromJson(Map<String, dynamic> json) {
   return SymbolCategoryDTO(
-    id: json['symbol_category_id'] as String,
+    id: json['id'] as num,
     name: json['name'] as String,
   );
 }
 
 Map<String, dynamic> _$SymbolCategoryDTOToJson(SymbolCategoryDTO instance) =>
     <String, dynamic>{
-      'symbol_category_id': instance.id,
+      'id': instance.id,
       'name': instance.name,
     };

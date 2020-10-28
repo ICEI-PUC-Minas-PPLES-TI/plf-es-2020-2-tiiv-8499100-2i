@@ -35,13 +35,39 @@ class SymbolDetailScreen extends StatelessWidget {
       ),
       backgroundColor: ColorsStyle.background,
       body: _buildBody(),
+      extendBody: true,
     );
   }
 
   _buildBody() {
     return SingleChildScrollView(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Align(
+            child: FadeInImage.assetNetwork(
+              alignment: Alignment.topCenter, // add this
+              placeholder: 'dummyimage',
+              image: symbol.img,
+              fit: BoxFit.fitWidth,
+            ),
+            alignment: Alignment.center,
+          ),
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: Text(
+              symbol.body,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+          ),
+        ],
+      ),
+    );
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           FadeInImage.assetNetwork(
             alignment: Alignment.topCenter, // add this

@@ -4,8 +4,7 @@ part 'VideoCategoryDTO.g.dart';
 
 @JsonSerializable()
 class VideoCategoryDTO {
-  @JsonKey(name: 'video_category_id')
-  String id;
+  num id;
   String name;
 
   VideoCategoryDTO({this.id, this.name});

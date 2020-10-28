@@ -8,20 +8,24 @@ part of 'PostDTO.dart';
 
 PostDTO _$PostDTOFromJson(Map<String, dynamic> json) {
   return PostDTO(
-    id: json['post_id'] as String,
+    id: json['id'] as num,
     title: json['title'] as String,
     body: json['body'] as String,
     date: json['date'] as String,
     img: json['img'] as String,
-    userRequired: json['user_required'] as bool,
+    requiresLogin: json['requiresLogin'] as bool,
+    isAd: json['isAd'] as bool,
+    url: json['url'] as String,
   );
 }
 
 Map<String, dynamic> _$PostDTOToJson(PostDTO instance) => <String, dynamic>{
-      'post_id': instance.id,
+      'id': instance.id,
       'title': instance.title,
       'body': instance.body,
       'date': instance.date,
       'img': instance.img,
-      'user_required': instance.userRequired,
+      'requiresLogin': instance.requiresLogin,
+      'isAd': instance.isAd,
+      'url': instance.url,
     };

@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/auth/login_screen.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/auth/user_screen.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/calculator/calculator_screen.dart';
+import 'package:inteligenciaindustrialapp/src/app/screens/forum/forum_screen.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/post/post_screen.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/symbol/symbol_categories_screen.dart';
 import 'package:inteligenciaindustrialapp/src/app/screens/video/video_categories_screen.dart';
@@ -35,6 +36,18 @@ class _HomeScreenState extends State<HomeScreen>
       extendBody: true,
       body: _buildBody(context),
       bottomNavigationBar: _indexBottom(),
+      floatingActionButton: Observer(
+        builder: (_) {
+          return _curIndex == 3
+              ? FloatingActionButton.extended(
+                  onPressed: homeController.actionCreateForum ?? () {},
+                  label: Text('Criar fórum'),
+                  icon: Icon(Icons.post_add),
+                  backgroundColor: ColorsStyle.blue,
+                )
+              : SizedBox.shrink();
+        },
+      ),
     );
   }
 
@@ -100,9 +113,8 @@ class _HomeScreenState extends State<HomeScreen>
                   homeController.setBody(VideoCategoriesScreen());
                   break;
                 case 3:
-                  homeController.setBody(Center(
-                    child: Text('Fórum'),
-                  ));
+                  forumController.getForums();
+                  homeController.setBody(ForumScreen());
                   break;
                 case 4:
                   homeController.setBody(CalculatorScreen());

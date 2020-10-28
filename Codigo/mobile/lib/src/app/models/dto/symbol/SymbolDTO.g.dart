@@ -8,7 +8,7 @@ part of 'SymbolDTO.dart';
 
 SymbolDTO _$SymbolDTOFromJson(Map<String, dynamic> json) {
   return SymbolDTO(
-    id: json['symbol_id'] as String,
+    id: json['id'] as num,
     title: json['title'] as String,
     body: json['body'] as String,
     img: json['img'] as String,
@@ -16,7 +16,7 @@ SymbolDTO _$SymbolDTOFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$SymbolDTOToJson(SymbolDTO instance) => <String, dynamic>{
-      'symbol_id': instance.id,
+      'id': instance.id,
       'title': instance.title,
       'body': instance.body,
       'img': instance.img,

@@ -26,6 +26,24 @@ mixin _$HomeController on _HomeControllerBase, Store {
     }, _$bodyAtom, name: '${_$bodyAtom.name}_set');
   }
 
+  final _$actionCreateForumAtom =
+      Atom(name: '_HomeControllerBase.actionCreateForum');
+
+  @override
+  Function get actionCreateForum {
+    _$actionCreateForumAtom.context.enforceReadPolicy(_$actionCreateForumAtom);
+    _$actionCreateForumAtom.reportObserved();
+    return super.actionCreateForum;
+  }
+
+  @override
+  set actionCreateForum(Function value) {
+    _$actionCreateForumAtom.context.conditionallyRunInAction(() {
+      super.actionCreateForum = value;
+      _$actionCreateForumAtom.reportChanged();
+    }, _$actionCreateForumAtom, name: '${_$actionCreateForumAtom.name}_set');
+  }
+
   final _$_HomeControllerBaseActionController =
       ActionController(name: '_HomeControllerBase');
 
@@ -44,6 +62,16 @@ mixin _$HomeController on _HomeControllerBase, Store {
     final _$actionInfo = _$_HomeControllerBaseActionController.startAction();
     try {
       return super.setBody(body);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setActionCreateForum(Function action) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction();
+    try {
+      return super.setActionCreateForum(action);
     } finally {
       _$_HomeControllerBaseActionController.endAction(_$actionInfo);
     }

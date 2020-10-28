@@ -8,20 +8,22 @@ part of 'UserDTO.dart';
 
 UserDTO _$UserDTOFromJson(Map<String, dynamic> json) {
   return UserDTO(
-    id: json['user_id'] as String,
+    uid: json['uid'] as String,
+    name: json['name'] as String,
+    phone: json['phone'] as String,
+    document: json['document'] as String,
+    businessName: json['businessName'] as String,
     message: json['message'] as String,
-  )
-    ..name = json['name'] as String
-    ..phone = json['phone'] as String
-    ..document = json['document'] as String
-    ..companyName = json['business_name'] as String;
+    isAdmin: json['isAdmin'] as bool,
+  );
 }
 
 Map<String, dynamic> _$UserDTOToJson(UserDTO instance) => <String, dynamic>{
-      'user_id': instance.id,
+      'uid': instance.uid,
       'name': instance.name,
       'phone': instance.phone,
       'document': instance.document,
-      'business_name': instance.companyName,
+      'businessName': instance.businessName,
       'message': instance.message,
+      'isAdmin': instance.isAdmin,
     };

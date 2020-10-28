@@ -1,8 +1,12 @@
 import 'package:inteligenciaindustrialapp/src/app/models/dto/symbol/SymbolDTO.dart';
 import 'package:inteligenciaindustrialapp/src/app/models/dto/symbol/category/SymbolCategoryDTO.dart';
 import 'package:inteligenciaindustrialapp/src/app/models/dto/symbol/subcategory/SymbolSubcategoryDTO.dart';
+import 'package:inteligenciaindustrialapp/src/app/providers/symbol/symbol_category_provider.dart';
+import 'package:inteligenciaindustrialapp/src/app/providers/symbol/symbol_provider.dart';
+import 'package:inteligenciaindustrialapp/src/app/providers/symbol/symbol_subcategory_provider.dart';
 import 'package:inteligenciaindustrialapp/src/app/services/service_status_data.dart';
 import 'package:inteligenciaindustrialapp/src/app/services/symbol_service.dart';
+import 'package:inteligenciaindustrialapp/src/app/utils/extensions/symbol_extension.dart';
 import 'package:mobx/mobx.dart';
 
 part 'symbol_controller.g.dart';
@@ -17,6 +21,11 @@ abstract class _SymbolControllerBase with Store {
   ServiceStatusData<List<SymbolSubcategoryDTO>> symbolsSubcategories =
       ServiceStatusData();
 
+  SymbolProvider symbolProvider = SymbolProvider();
+  SymbolCategoryProvider symbolCategoryProvider = SymbolCategoryProvider();
+  SymbolSubcategoryProvider symbolSubcategoryProvider =
+      SymbolSubcategoryProvider();
+
   @action
   getSymbolsBySubcategory(String subcategoryId) {
     symbols.setPending();
@@ -25,8 +34,20 @@ abstract class _SymbolControllerBase with Store {
         .getSymbolsBySubcategory(subcategoryId: subcategoryId)
         .then((response) {
       symbols.setDone(response);
+
+      if (response != null) {
+        symbolProvider
+            .saveListSymbols(response.map((e) => e.toEntity()).toList());
+      }
     }).catchError((error) {
-      symbols.setError(error);
+      List<SymbolDTO> list =
+          symbolProvider.symbols?.map((e) => e.toDTO())?.toList();
+
+      if (list != null && list.isNotEmpty) {
+        symbols.setDone(list);
+      } else {
+        symbols.setError(error);
+      }
     });
   }
 
@@ -35,8 +56,20 @@ abstract class _SymbolControllerBase with Store {
     symbolsCategories.setPending();
     this._symbolService.getCategoriesSymbols().then((response) {
       symbolsCategories.setDone(response);
+
+      if (response != null) {
+        symbolCategoryProvider.saveListSymbolCategories(
+            response.map((e) => e.toEntity()).toList());
+      }
     }).catchError((error) {
-      symbolsCategories.setError(error);
+      List<SymbolCategoryDTO> list =
+          symbolCategoryProvider.categories?.map((e) => e.toDTO())?.toList();
+
+      if (list != null && list.isNotEmpty) {
+        symbolsCategories.setDone(list);
+      } else {
+        symbolsCategories.setError(error);
+      }
     });
   }
 
@@ -48,8 +81,21 @@ abstract class _SymbolControllerBase with Store {
         .getSubcategoriesByCategorySymbols(categoryId: categoryId)
         .then((response) {
       symbolsSubcategories.setDone(response);
+
+      if (response != null) {
+        symbolSubcategoryProvider.saveListSymbolSubcategories(
+            response.map((e) => e.toEntity()).toList());
+      }
     }).catchError((error) {
-      symbolsSubcategories.setError(error);
+      List<SymbolSubcategoryDTO> list = symbolSubcategoryProvider.subcategories
+          ?.map((e) => e.toDTO())
+          ?.toList();
+
+      if (list != null && list.isNotEmpty) {
+        symbolsSubcategories.setDone(list);
+      } else {
+        symbolsSubcategories.setError(error);
+      }
     });
   }
 

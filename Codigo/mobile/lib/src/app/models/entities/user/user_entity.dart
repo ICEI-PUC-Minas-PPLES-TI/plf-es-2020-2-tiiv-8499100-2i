@@ -5,7 +5,7 @@ part 'user_entity.g.dart';
 @HiveType(typeId: 7)
 class UserEntity extends HiveObject {
   @HiveField(0)
-  String id;
+  String uid;
 
   @HiveField(1)
   String name;
@@ -17,8 +17,14 @@ class UserEntity extends HiveObject {
   String document;
 
   @HiveField(4)
-  String companyName;
+  String businessName;
 
   @HiveField(5)
   String message;
+
+  @HiveField(6)
+  bool isAdmin;
+
+  @HiveField(7)
+  bool logged = false;
 }

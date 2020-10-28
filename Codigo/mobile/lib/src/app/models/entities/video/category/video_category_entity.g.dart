@@ -17,7 +17,7 @@ class VideoCategoryEntityAdapter extends TypeAdapter<VideoCategoryEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return VideoCategoryEntity()
-      ..id = fields[0] as String
+      ..id = fields[0] as num
       ..name = fields[1] as String;
   }
 

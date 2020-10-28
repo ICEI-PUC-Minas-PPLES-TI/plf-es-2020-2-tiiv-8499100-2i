@@ -5,9 +5,9 @@ part 'SymbolStatisticDTO.g.dart';
 @JsonSerializable()
 class SymbolStatisticDTO {
   String symbol_id;
-  String user_id;
+  String uid;
 
-  SymbolStatisticDTO({this.symbol_id, this.user_id});
+  SymbolStatisticDTO({this.symbol_id, this.uid});
 
   factory SymbolStatisticDTO.fromJson(Map<String, dynamic> json) =>
       _$SymbolStatisticDTOFromJson(json);

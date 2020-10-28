@@ -8,14 +8,20 @@ part of 'VideoDTO.dart';
 
 VideoDTO _$VideoDTOFromJson(Map<String, dynamic> json) {
   return VideoDTO(
-    id: json['video_id'] as String,
+    id: json['id'] as num,
     title: json['title'] as String,
-    youtubeUrl: json['youtube_url'] as String,
+    youtubeUrl: json['youtubeUrl'] as String,
+    isAd: json['isAd'] as bool,
+    url: json['url'] as String,
+    img: json['img'] as String,
   );
 }
 
 Map<String, dynamic> _$VideoDTOToJson(VideoDTO instance) => <String, dynamic>{
-      'video_id': instance.id,
+      'id': instance.id,
       'title': instance.title,
-      'youtube_url': instance.youtubeUrl,
+      'youtubeUrl': instance.youtubeUrl,
+      'isAd': instance.isAd,
+      'url': instance.url,
+      'img': instance.img,
     };

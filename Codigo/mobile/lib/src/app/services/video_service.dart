@@ -1,4 +1,4 @@
-import 'package:inteligenciaindustrialapp/src/app/models/dto/statistic/VideoStatisticDTO.dart';
+import 'package:dio/dio.dart';
 import 'package:inteligenciaindustrialapp/src/app/models/dto/video/VideoDTO.dart';
 import 'package:inteligenciaindustrialapp/src/app/models/dto/video/category/VideoCategoryDTO.dart';
 import 'package:inteligenciaindustrialapp/src/app/utils/library/helpers/global.dart';
@@ -23,7 +23,7 @@ class VideoService extends BaseService {
 
   Future<List<VideoDTO>> getVideosByCategory({String categoryId}) {
     return this
-        .request(HttpMethod.GET, 'video/category/$categoryId', headers: headers)
+        .request(HttpMethod.GET, 'video', headers: headers)
         .then((response) {
       if (response == null) return null;
       List videos = response as List;
@@ -33,8 +33,12 @@ class VideoService extends BaseService {
     });
   }
 
-  sendStatistic({String videoId}){
-    VideoStatisticDTO statisticDTO = VideoStatisticDTO(video_id: videoId, user_id: userController.user.getData?.id ?? '');
-    this.request(HttpMethod.POST, 'video_view', headers: headers, body: statisticDTO.toJson());
+  sendStatistic({String videoId}) {
+    FormData data = FormData.fromMap({
+      'uid': userController.user.getData?.uid,
+      'video_id': videoId,
+    });
+
+    this.request(HttpMethod.POST, 'video_view', headers: headers, body: data);
   }
 }

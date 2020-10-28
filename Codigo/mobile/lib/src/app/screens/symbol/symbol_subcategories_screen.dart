@@ -66,8 +66,8 @@ class SymbolSubcategoriesScreen extends StatelessWidget {
                         title: subcategory.name,
                         top: index == 0,
                         action: () {
-                          symbolController
-                              .getSymbolsBySubcategory(subcategory.id);
+                          symbolController.getSymbolsBySubcategory(
+                              subcategory.id.toString());
                           homeController.setBody(SymbolScreen());
                         });
                   },

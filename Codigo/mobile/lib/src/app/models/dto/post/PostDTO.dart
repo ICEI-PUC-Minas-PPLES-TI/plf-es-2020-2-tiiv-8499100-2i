@@ -4,19 +4,24 @@ part 'PostDTO.g.dart';
 
 @JsonSerializable()
 class PostDTO {
-  @JsonKey(name: 'post_id')
-  String id;
-
+  num id;
   String title;
   String body;
   String date;
   String img;
-
-  @JsonKey(name: 'user_required')
-  bool userRequired;
+  bool requiresLogin;
+  bool isAd;
+  String url;
 
   PostDTO(
-      {this.id, this.title, this.body, this.date, this.img, this.userRequired});
+      {this.id,
+      this.title,
+      this.body,
+      this.date,
+      this.img,
+      this.requiresLogin,
+      this.isAd,
+      this.url});
 
   factory PostDTO.fromJson(Map<String, dynamic> json) =>
       _$PostDTOFromJson(json);

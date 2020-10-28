@@ -11,6 +11,16 @@ class VideoCategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
+        if (!appConnection.isConnected ||
+            videoController.videosCategories.isError) {
+          return Center(
+              child: Text(
+            "Você está off-line.\nPor favor verifique sua conexão com a internet.",
+            style: TextStyle(fontSize: 16),
+            textAlign: TextAlign.center,
+          ));
+        }
+
         if (videoController.videosCategories.isPending) {
           return Padding(
             padding: EdgeInsets.all(24),
@@ -39,7 +49,8 @@ class VideoCategoriesScreen extends StatelessWidget {
                     title: category.name,
                     top: index == 0,
                     action: () {
-                      videoController.getVideosByCategory(category.id);
+                      videoController
+                          .getVideosByCategory(category.id.toString());
                       homeController.setBody(VideoScreen());
                     });
               },

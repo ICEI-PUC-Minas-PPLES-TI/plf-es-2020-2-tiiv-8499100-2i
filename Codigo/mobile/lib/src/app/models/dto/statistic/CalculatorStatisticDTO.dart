@@ -5,9 +5,9 @@ part 'CalculatorStatisticDTO.g.dart';
 @JsonSerializable()
 class CalculatorStatisticDTO {
   String calculator_type;
-  String user_id;
+  String uid;
 
-  CalculatorStatisticDTO({this.calculator_type, this.user_id});
+  CalculatorStatisticDTO({this.calculator_type, this.uid});
 
   factory CalculatorStatisticDTO.fromJson(Map<String, dynamic> json) =>
       _$CalculatorStatisticDTOFromJson(json);

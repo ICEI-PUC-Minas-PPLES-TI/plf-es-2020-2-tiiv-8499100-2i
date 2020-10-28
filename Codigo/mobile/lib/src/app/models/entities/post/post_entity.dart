@@ -5,7 +5,7 @@ part 'post_entity.g.dart';
 @HiveType(typeId: 0)
 class PostEntity extends HiveObject {
   @HiveField(0)
-  String id;
+  num id;
 
   @HiveField(1)
   String title;
@@ -19,5 +19,22 @@ class PostEntity extends HiveObject {
   @HiveField(4)
   String img;
 
-  PostEntity({this.id, this.title, this.body, this.date, this.img});
+  @HiveField(5)
+  bool requiresLogin;
+
+  @HiveField(6)
+  bool isAd;
+
+  @HiveField(7)
+  String url;
+
+  PostEntity(
+      {this.id,
+      this.title,
+      this.body,
+      this.date,
+      this.img,
+      this.requiresLogin,
+      this.isAd,
+      this.url});
 }

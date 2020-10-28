@@ -4,8 +4,7 @@ part 'SymbolDTO.g.dart';
 
 @JsonSerializable()
 class SymbolDTO {
-  @JsonKey(name: 'symbol_id')
-  String id;
+  num id;
   String title;
   String body;
   String img;

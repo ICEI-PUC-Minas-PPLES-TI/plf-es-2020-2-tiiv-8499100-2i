@@ -4,21 +4,22 @@ part 'UserDTO.g.dart';
 
 @JsonSerializable()
 class UserDTO {
-  @JsonKey(name: 'user_id')
-  String id;
-
+  String uid;
   String name;
-
   String phone;
-
   String document;
-
-  @JsonKey(name: 'business_name')
-  String companyName;
-
+  String businessName;
   String message;
+  bool isAdmin;
 
-  UserDTO({this.id, this.message});
+  UserDTO(
+      {this.uid,
+      this.name,
+      this.phone,
+      this.document,
+      this.businessName,
+      this.message,
+      this.isAdmin});
 
   factory UserDTO.fromJson(Map<String, dynamic> json) =>
       _$UserDTOFromJson(json);

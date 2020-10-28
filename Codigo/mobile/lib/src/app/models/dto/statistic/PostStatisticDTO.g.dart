@@ -9,12 +9,12 @@ part of 'PostStatisticDTO.dart';
 PostStatisticDTO _$PostStatisticDTOFromJson(Map<String, dynamic> json) {
   return PostStatisticDTO(
     post_id: json['post_id'] as String,
-    user_id: json['user_id'] as String,
+    uid: json['uid'] as String,
   );
 }
 
 Map<String, dynamic> _$PostStatisticDTOToJson(PostStatisticDTO instance) =>
     <String, dynamic>{
       'post_id': instance.post_id,
-      'user_id': instance.user_id,
+      'uid': instance.uid,
     };

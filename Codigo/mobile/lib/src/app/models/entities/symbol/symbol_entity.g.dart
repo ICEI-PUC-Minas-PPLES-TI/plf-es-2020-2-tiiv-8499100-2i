@@ -17,7 +17,7 @@ class SymbolEntityAdapter extends TypeAdapter<SymbolEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SymbolEntity()
-      ..id = fields[0] as String
+      ..id = fields[0] as num
       ..title = fields[1] as String
       ..body = fields[2] as String
       ..img = fields[3] as String;

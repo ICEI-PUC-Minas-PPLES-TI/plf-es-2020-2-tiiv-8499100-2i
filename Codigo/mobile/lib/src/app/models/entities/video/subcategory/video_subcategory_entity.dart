@@ -5,7 +5,7 @@ part 'video_subcategory_entity.g.dart';
 @HiveType(typeId: 6)
 class VideoSubcategoryEntity extends HiveObject {
   @HiveField(0)
-  String id;
+  num id;
 
   @HiveField(1)
   String name;

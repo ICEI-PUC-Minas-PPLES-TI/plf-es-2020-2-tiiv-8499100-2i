@@ -8,7 +8,7 @@ part of 'SymbolSubcategoryDTO.dart';
 
 SymbolSubcategoryDTO _$SymbolSubcategoryDTOFromJson(Map<String, dynamic> json) {
   return SymbolSubcategoryDTO(
-    id: json['symbol_sub_category_id'] as String,
+    id: json['id'] as num,
     name: json['name'] as String,
   );
 }
@@ -16,6 +16,6 @@ SymbolSubcategoryDTO _$SymbolSubcategoryDTOFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$SymbolSubcategoryDTOToJson(
         SymbolSubcategoryDTO instance) =>
     <String, dynamic>{
-      'symbol_sub_category_id': instance.id,
+      'id': instance.id,
       'name': instance.name,
     };

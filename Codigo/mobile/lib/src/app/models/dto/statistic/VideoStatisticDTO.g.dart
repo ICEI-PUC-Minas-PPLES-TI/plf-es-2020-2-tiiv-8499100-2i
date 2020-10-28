@@ -9,12 +9,12 @@ part of 'VideoStatisticDTO.dart';
 VideoStatisticDTO _$VideoStatisticDTOFromJson(Map<String, dynamic> json) {
   return VideoStatisticDTO(
     video_id: json['video_id'] as String,
-    user_id: json['user_id'] as String,
+    uid: json['uid'] as String,
   );
 }
 
 Map<String, dynamic> _$VideoStatisticDTOToJson(VideoStatisticDTO instance) =>
     <String, dynamic>{
       'video_id': instance.video_id,
-      'user_id': instance.user_id,
+      'uid': instance.uid,
     };

@@ -20,16 +20,19 @@ class PostDetailScreen extends StatelessWidget {
         titleSpacing: 0,
         title: Row(
           children: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                size: 16,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                frwkNavigator.popNavigate();
-              },
-            ),
+            FlatButton.icon(
+                onPressed: () {
+                  frwkNavigator.popNavigate();
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  size: 20,
+                  color: Colors.white,
+                ),
+                label: Text(
+                  'Voltar',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                )),
           ],
         ),
       ),
@@ -43,11 +46,16 @@ class PostDetailScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          FadeInImage.assetNetwork(
-            alignment: Alignment.topCenter, // add this
-            placeholder: 'dummyimage',
-            image: post.img,
-            fit: BoxFit.fitWidth,
+          Align(
+            alignment: Alignment.center,
+            child: post.img == null
+                ? SizedBox.shrink()
+                : FadeInImage.assetNetwork(
+                    alignment: Alignment.topCenter, // add this
+                    placeholder: 'dummyimage',
+                    image: post.img,
+                    fit: BoxFit.fitWidth,
+                  ),
           ),
           Padding(
             padding: EdgeInsets.all(20),

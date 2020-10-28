@@ -1,4 +1,4 @@
-import 'package:inteligenciaindustrialapp/src/app/models/dto/statistic/SymbolStatisticDTO.dart';
+import 'package:dio/dio.dart';
 import 'package:inteligenciaindustrialapp/src/app/models/dto/symbol/SymbolDTO.dart';
 import 'package:inteligenciaindustrialapp/src/app/models/dto/symbol/category/SymbolCategoryDTO.dart';
 import 'package:inteligenciaindustrialapp/src/app/models/dto/symbol/subcategory/SymbolSubcategoryDTO.dart';
@@ -36,9 +36,9 @@ class SymbolService extends BaseService {
 
   Future<List<SymbolSubcategoryDTO>> getSubcategoriesByCategorySymbols(
       {String categoryId}) {
+    //category/$categoryId
     return this
-        .request(HttpMethod.GET, 'symbol_sub_category/category/$categoryId',
-            headers: headers)
+        .request(HttpMethod.GET, 'symbol_subcategory', headers: headers)
         .then((response) {
       if (response == null) return null;
       List subcategories = response as List;
@@ -51,9 +51,9 @@ class SymbolService extends BaseService {
   }
 
   Future<List<SymbolDTO>> getSymbolsBySubcategory({String subcategoryId}) {
+    //sub_category/$subcategoryId
     return this
-        .request(HttpMethod.GET, 'symbol/sub_category/$subcategoryId',
-            headers: headers)
+        .request(HttpMethod.GET, 'symbol', headers: headers)
         .then((response) {
       if (response == null) return null;
       List symbols = response as List;
@@ -64,9 +64,11 @@ class SymbolService extends BaseService {
   }
 
   sendStatistic({String symbolId}) {
-    SymbolStatisticDTO statisticDTO = SymbolStatisticDTO(
-        symbol_id: symbolId, user_id: userController.user.getData?.id ?? '');
-    this.request(HttpMethod.POST, 'symbol_view',
-        headers: headers, body: statisticDTO.toJson());
+    FormData data = FormData.fromMap({
+      'uid': userController.user.getData?.uid,
+      'symbol_id': symbolId,
+    });
+
+    this.request(HttpMethod.POST, 'symbol_view', headers: headers, body: data);
   }
 }

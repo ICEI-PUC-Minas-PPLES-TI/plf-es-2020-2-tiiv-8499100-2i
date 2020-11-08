@@ -19,7 +19,7 @@ type PropsType = {
 		event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
 	) => void;
 	type: "new" | "update";
-	symbolSubcategory: SymbolSubcategoryType;
+	symbolSubcategory: any;
 	symbolCategories: SymbolCategoryType[];
 };
 
@@ -48,7 +48,7 @@ const SymbolSubcategoryPage = (props: PropsType) => (
 					inputAttrs={{
 						id: "category_id",
 						onChange: props.onChangeInput,
-						defaultValue: props.symbolSubcategory.categoryId ?? "",
+						defaultValue: props.symbolSubcategory.category_id ?? "",
 					}}
 				/>
 			</Row>

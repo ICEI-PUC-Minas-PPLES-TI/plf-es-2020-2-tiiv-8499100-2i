@@ -39,7 +39,16 @@ def get_post(id):
     post = get(Post, id)
     author = AuthorDTO(post.author.id, post.author.name, post.author.biography).__dict__
     post = post.__dict__
-    return PostDTO(post['id'], post['title'], post['body'], post['date'].isoformat(), post['img'], post['requires_login'], author).__dict__
+    return PostDTO(
+        post['id'],
+        post['title'],
+        post['body'],
+        post['date'].isoformat(),
+        post['img'],
+        post['requires_login'],
+        author,
+        post['publish_date'].isoformat()
+    ).__dict__
 
 
 def update_post(id, title, body, publish_date, img, requires_login, author_id):

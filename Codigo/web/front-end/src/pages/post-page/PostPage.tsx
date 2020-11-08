@@ -72,7 +72,7 @@ const PostPage = (props: PropsType) => (
 					inputAttrs={{
 						id: "author_id",
 						onChange: props.onChangeInput,
-						defaultValue: props.post.authorId ?? "",
+						defaultValue: props.post.author?.id ?? "",
 					}}
 				/>
 			</Row>

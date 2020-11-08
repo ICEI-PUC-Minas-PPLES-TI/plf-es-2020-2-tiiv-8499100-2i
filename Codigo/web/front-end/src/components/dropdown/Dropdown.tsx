@@ -13,6 +13,12 @@ type PropsType = {
 const Dropdown = (props: PropsType) => {
 	return (
 		<div className={classes["dropdown"]}>
+			<label
+				className={classes["dropdown-label"]}
+				htmlFor={props.inputAttrs.id}
+			>
+				{props.label}
+			</label>
 			<div className={classes["dropdown-input"]}>
 				<select className={classes["dropdown-select"]} {...props.inputAttrs}>
 					<option disabled value="">

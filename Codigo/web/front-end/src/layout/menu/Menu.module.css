@@ -46,6 +46,7 @@
 	margin-bottom: 20px;
 	text-align: center;
 	transition: all 0.2s;
+	cursor: pointer;
 }
 .menu-nav-item:hover {
 	background-color: #fff;

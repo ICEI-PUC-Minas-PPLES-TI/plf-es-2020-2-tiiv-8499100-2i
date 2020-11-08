@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { cleanUser } from "../../utils/session";
 
 import classes from "./Menu.module.css";
 
@@ -14,12 +15,14 @@ const Menu = () => {
 		setMenuOpen(false);
 	};
 
+	const logoff = () => {
+		cleanUser();
+		window.location.reload();
+	};
+
 	return (
 		<>
-			<button
-				className={classes["menu-button"]}
-				onClick={menuClickHandler}
-			>
+			<button className={classes["menu-button"]} onClick={menuClickHandler}>
 				<i className={classes["menu-icon"]} />
 				<i className={classes["menu-icon"]} />
 				<i className={classes["menu-icon"]} />
@@ -34,27 +37,9 @@ const Menu = () => {
 						>
 							Home
 						</Link>
-						<Link
-							onClick={closeMenu}
-							className={classes["menu-nav-item"]}
-							to="/post"
-						>
-							Posts
-						</Link>
-						<Link
-							onClick={closeMenu}
-							className={classes["menu-nav-item"]}
-							to="/simbolo"
-						>
-							Símbolos
-						</Link>
-						<Link
-							onClick={closeMenu}
-							className={classes["menu-nav-item"]}
-							to="/video"
-						>
-							Vídeos
-						</Link>
+						<span onClick={logoff} className={classes["menu-nav-item"]}>
+							Sair
+						</span>
 					</nav>
 				</div>
 			) : null}

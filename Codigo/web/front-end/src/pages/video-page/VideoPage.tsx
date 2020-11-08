@@ -2,7 +2,6 @@ import React, { ChangeEvent, useState, useEffect } from "react";
 import { FormEvent } from "react";
 import { Link } from "react-router-dom";
 
-import { VideoType } from "../../types/video";
 import Column from "../../layout/column/Column";
 import Row from "../../layout/row/Row";
 import TextField from "../../components/text-field/TextField";
@@ -20,7 +19,7 @@ type PropsType = {
 	) => void;
 	onUpdateInfo: (data: { key: string; value: string }) => void;
 	type: "new" | "update";
-	video: VideoType;
+	video: any;
 	videoSubcategories: VideoSubcategoryType[];
 };
 
@@ -97,13 +96,13 @@ const VideoPage = (props: PropsType) => {
 				<Spacer vertical={40} />
 				<Row>
 					<TextField
-						label="URL do vídeo"
+						label="Data de Publicação do Vídeo"
 						inputAttrs={{
 							id: "date",
 							type: "date",
 							placeholder: "Exemplo: 22/03/2013",
 							onChange: onChangeInputHandler,
-							value: props.video.date,
+							value: props.video.date?.split("T")[0],
 						}}
 					/>
 				</Row>
@@ -118,7 +117,7 @@ const VideoPage = (props: PropsType) => {
 						inputAttrs={{
 							id: "subcategory_id",
 							onChange: props.onChangeInput,
-							defaultValue: props.video.categoryId ?? "",
+							defaultValue: props.video.subcategory_id ?? "",
 						}}
 					/>
 				</Row>

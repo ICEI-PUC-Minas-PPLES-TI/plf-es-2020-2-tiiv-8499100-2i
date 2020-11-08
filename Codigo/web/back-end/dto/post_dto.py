@@ -1,5 +1,5 @@
 class PostDTO:
-	def __init__(self, id, title, body, date, img, requiresLogin, author):
+	def __init__(self, id, title, body, date, img, requiresLogin, author, publish_date):
 		self.id = id
 		self.title = title
 		self.body = body
@@ -9,6 +9,7 @@ class PostDTO:
 		self.requires_login = requiresLogin
 		self.author = author
 		self.isAd = False
+		self.publish_date = publish_date
 
 	def get_id(self):
 		return self.id

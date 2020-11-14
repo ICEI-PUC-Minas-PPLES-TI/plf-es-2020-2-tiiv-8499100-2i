@@ -1,9 +1,11 @@
 import json
+import os
+
 import pyrebase
 
 
 def setCredential():
-    with open('credentials/TIS3-2I-50f1439d65a7.json') as source:
+    with open(os.environ.get('PATH_CREDENTIALS')) as source:
         info = json.load(source)
 
     return pyrebase.initialize_app(info)

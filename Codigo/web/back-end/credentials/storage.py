@@ -16,6 +16,8 @@ from __future__ import absolute_import
 
 import datetime
 import json
+import os
+
 import six
 
 from flask import current_app
@@ -26,12 +28,13 @@ from werkzeug.utils import secure_filename
 
 
 def _get_storage_client():
-    with open('credentials/TIS3-2I-50f1439d65a7.json') as source:
+    path_credentials = os.environ.get('PATH_CREDENTIALS')
+    with open(path_credentials) as source:
         info = json.load(source)
 
     storage_credentials = service_account.Credentials.from_service_account_info(info)
 
-    return storage.Client(project=current_app.config['PROJECT_ID'], credentials=storage_credentials)
+    return storage.Client(project=storage_credentials.project_id, credentials=storage_credentials)
 
 
 def _check_extension(filename, allowed_extensions):
@@ -76,7 +79,7 @@ def upload_file(file_stream, filename, content_type, path):
     filename = _safe_filename(filename)
 
     client = _get_storage_client()
-    bucket = client.bucket(current_app.config['CLOUD_STORAGE_BUCKET'])
+    bucket = client.bucket(os.environ.get('CLOUD_STORAGE_BUCKET'))
     blob = bucket.blob(path + '/' + filename)
 
     blob.upload_from_string(

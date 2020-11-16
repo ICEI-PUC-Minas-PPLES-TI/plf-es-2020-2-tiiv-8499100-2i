@@ -1,0 +1,351 @@
+{
+	"info": {
+		"_postman_id": "a5898dff-b536-4b51-b686-358f720e4280",
+		"name": "api-testing-2i-video-category-endpoints",
+		"description": "Api testing for 2i inteligencia industrial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "sucessPostVideoCategory",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0409ddef-810b-46bd-b5b5-9d5f565258f4",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "bb233afa-87f0-4aba-8342-a933558538b4",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "{{$randomCity}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/video_category",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"video_category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessGetAllVideoCategory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2cc4cc24-ae36-4be0-9c82-7e4a8205a412",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/video_category",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"video_category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessGetSpecificVideoCategory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "40286517-410b-4ca0-82f8-07818f00ea30",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d2f02a94-9db2-4645-8423-e68853de5b30",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/video_category',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var video_category_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"video_category_id\", video_category_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/video_category/{{video_category_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"video_category",
+						"{{video_category_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessPutVideoCategory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e84f22ab-434a-4360-8cf7-33b5f18859e6",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1490ac1e-2283-4dc9-8f44-43a4ec3bb6c6",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/video_category',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var video_category_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"video_category_id\", video_category_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "{{$randomFirstName}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/video_category/{{video_category_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"video_category",
+						"{{video_category_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessDeleteVideoCategory",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e31540ea-eaa5-4806-b91d-e3621feac3db",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/video_category',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var video_category_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"video_category_id\", video_category_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "ce3d1505-6af0-4223-9226-6a754063bb66",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{host}}/video_category/{{video_category_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"video_category",
+						"{{video_category_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1988211e-e6db-4c1e-939d-9631c85aeef8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "62f4eaca-3f07-4bc1-9803-0fce426fc8f5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "54ef1f8c-b2e8-4ad1-ba20-52dffed2255e",
+			"key": "email",
+			"value": "admin@admin.com"
+		},
+		{
+			"id": "c77aaadd-6145-4e9f-84bc-8dbb32847576",
+			"key": "password",
+			"value": "12345678"
+		},
+		{
+			"id": "ac7657ed-4c67-4948-88f2-4a5a07996a1e",
+			"key": "name",
+			"value": "Arthur"
+		},
+		{
+			"id": "893288bb-edf1-4e17-9cf7-4ed2ba9f8bb2",
+			"key": "document",
+			"value": "11111111111"
+		},
+		{
+			"id": "7365eaad-af0a-4070-a1a6-9c5386d86b56",
+			"key": "business_name",
+			"value": "inteligencia industrial"
+		},
+		{
+			"id": "7621671b-9c95-4c7f-a7b1-54068a713c27",
+			"key": "phone",
+			"value": "31999999999"
+		},
+		{
+			"id": "cdd577f7-7456-46c4-ac4a-65bf44ff9367",
+			"key": "host",
+			"value": "https://inteligencia-industrial-2i.herokuapp.com"
+		},
+		{
+			"id": "07a0a400-54e0-481a-aee2-dcb0bac57efa",
+			"key": "uid",
+			"value": ""
+		},
+		{
+			"id": "8a15f693-c35c-4dd6-9093-a338719d24e9",
+			"key": "title",
+			"value": "Gandalf"
+		},
+		{
+			"id": "29065e67-e7e3-4a0f-acbb-d9637f422066",
+			"key": "youtube_url",
+			"value": "https://youtu.be/G1IbRujko-A"
+		},
+		{
+			"id": "3030015d-f80b-4eb4-a27f-b45947f80668",
+			"key": "date",
+			"value": "2020-01-01"
+		},
+		{
+			"id": "4469c725-6e75-4859-85f8-2fb816dac503",
+			"key": "subcategory_id",
+			"value": "11"
+		},
+		{
+			"id": "fc3b6cb2-b9ef-430b-879d-1690e41f2781",
+			"key": "video_id",
+			"value": ""
+		},
+		{
+			"id": "eda83273-6fff-44ec-8d63-0c115c2d220b",
+			"key": "video_category_id",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}

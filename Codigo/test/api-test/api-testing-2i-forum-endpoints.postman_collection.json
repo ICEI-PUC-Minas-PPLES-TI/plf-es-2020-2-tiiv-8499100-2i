@@ -1,0 +1,399 @@
+{
+	"info": {
+		"_postman_id": "a2fbfe63-e3ac-4ddb-88d7-8e1871695223",
+		"name": "api-testing-2i-forum-endpoints",
+		"description": "Api testing for 2i inteligencia industrial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "successPostForum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "31d08e17-bc6f-45e8-a7fa-e3c565100290",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "80cf1fd7-c5d3-4d29-84ee-785eaee821a7",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/user',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var uid = res.json()[0].uid;",
+							"    pm.collectionVariables.set(\"uid\", uid);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "{{$randomFirstName}}",
+							"type": "text"
+						},
+						{
+							"key": "body",
+							"value": "{{$randomUrl}}",
+							"type": "text"
+						},
+						{
+							"key": "uid",
+							"value": "{{uid}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/forum",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"forum"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessGetAllForum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2781d6b6-8faa-45ca-a782-37396a9255a0",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/forum",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"forum"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessGetSpecificForum",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e56d460d-02ab-43fc-88d0-f78d8bdb094b",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/forum',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var forum_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"forum_id\", forum_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "4edb9e2f-5717-4d3a-9f70-325ece3441fa",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/forum/{{forum_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"forum",
+						"{{forum_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessPutForum",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b1d4f70e-b102-4b17-be75-531ede080b58",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/forum',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var forum_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"forum_id\", forum_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad0b11e3-cfde-48a5-a4aa-d9eef3ac8fb5",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "text",
+							"value": "{{$randomFirstName}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/forum/{{forum_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"forum",
+						"{{forum_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessDeleteForum",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ded2e6ef-55f6-42e1-9385-10e213843992",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/forum',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var forum_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"forum_id\", forum_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b7f432d2-c600-44f1-92df-a7a5329bdd5f",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{host}}/forum/{{forum_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"forum",
+						"{{forum_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1f9c0f5b-7b0d-4dd1-9106-718b9366484a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f9490a98-d8ce-49d2-b920-f78c291a9e24",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "de69527f-54f8-43dc-a7fc-c70ab90f5f99",
+			"key": "email",
+			"value": "admin@admin.com"
+		},
+		{
+			"id": "4da413e0-27db-4919-a03d-df15c1868a9d",
+			"key": "password",
+			"value": "12345678"
+		},
+		{
+			"id": "913544b9-1af1-4bf4-a9e7-01769dee4698",
+			"key": "name",
+			"value": "Arthur"
+		},
+		{
+			"id": "ef1ffb0b-33ef-436c-ae9d-9c0614dd1cbf",
+			"key": "document",
+			"value": "11111111111"
+		},
+		{
+			"id": "a7d867f7-1686-4753-8b95-fcbf4fd27f46",
+			"key": "business_name",
+			"value": "inteligencia industrial"
+		},
+		{
+			"id": "0d74ec01-cb76-4d9f-a3a1-8de02fd6085b",
+			"key": "phone",
+			"value": "31999999999"
+		},
+		{
+			"id": "e58f0705-f8f9-434c-97e2-c1f1b548e384",
+			"key": "host",
+			"value": "https://inteligencia-industrial-2i.herokuapp.com"
+		},
+		{
+			"id": "74a716ff-5ade-4ddb-8243-618dedaafed3",
+			"key": "uid",
+			"value": ""
+		},
+		{
+			"id": "8682f97a-1d2d-4ea3-b97a-611f5cf960f1",
+			"key": "title",
+			"value": "Gandalf"
+		},
+		{
+			"id": "c7f5eeec-048a-445c-a606-bb910dc1abf1",
+			"key": "youtube_url",
+			"value": "https://youtu.be/G1IbRujko-A"
+		},
+		{
+			"id": "93e3c2d0-7b7b-4e74-aa74-d3e80e82d06d",
+			"key": "date",
+			"value": "2020-01-01"
+		},
+		{
+			"id": "fb8370ea-e7b3-460c-959c-be31b5d48404",
+			"key": "subcategory_id",
+			"value": "11"
+		},
+		{
+			"id": "bb54d0f0-fa5f-40f8-9d40-1b5607ee6cf2",
+			"key": "video_id",
+			"value": ""
+		},
+		{
+			"id": "7218becf-836d-48d9-a63b-3e323fa57071",
+			"key": "video_category_id",
+			"value": ""
+		},
+		{
+			"id": "8f89ea00-3f28-4aa1-b272-056d33cd931a",
+			"key": "symbol_subcategory_id",
+			"value": ""
+		},
+		{
+			"id": "d5426d43-fc91-42b2-9a77-30b7721241a0",
+			"key": "symbol_category_id",
+			"value": ""
+		},
+		{
+			"id": "b9fda7fa-6634-4e95-b3b9-ac8f34e4f97c",
+			"key": "symbol_id",
+			"value": ""
+		},
+		{
+			"id": "ac75acdd-ba47-4cd4-9aac-2942709418bb",
+			"key": "author_id",
+			"value": ""
+		},
+		{
+			"id": "88c81e56-9bf4-43de-a9ca-5a4ffa0da2bb",
+			"key": "ad_id",
+			"value": ""
+		},
+		{
+			"id": "5ea10e81-ddb1-4afc-abbd-3d19c95ae9a8",
+			"key": "forum_id",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}

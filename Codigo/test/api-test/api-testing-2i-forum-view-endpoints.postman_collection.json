@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "4249fcce-1ed7-40a4-b207-9e76c5739c92",
+		"name": "api-testing-2i-forum-view-endpoints",
+		"description": "Api testing for 2i inteligencia industrial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "successPostForumView",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e659db12-c69e-45a2-939f-a87a0e684ce0",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b3041b9b-f969-43c2-8b9d-feb7fb3dbd5b",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/user',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var uid = res.json()[0].uid;",
+							"    pm.collectionVariables.set(\"uid\", uid);",
+							"});",
+							"",
+							"const reqObject2 = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/forum',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject2, (err, res) => {",
+							"    var forum_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"forum_id\", forum_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "{{uid}}",
+							"type": "text"
+						},
+						{
+							"key": "forum_id",
+							"value": "{{forum_id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/forum_view",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"forum_view"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "successGetAllForumView",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5341ac95-4c52-496b-8bb5-0434d2ab02ce",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c377bc94-dbad-4a18-99c4-8d8f101291e2",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/forum_view",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"forum_view"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessGetForumViewFilter",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "59a605f7-6bfa-4b59-8bf3-2957f5e9daf0",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1883637d-df97-4b75-b7e9-942608d51d70",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/forum_view/filter",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"forum_view",
+						"filter"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ccf8c246-1a3e-4dc4-ae78-e938babdd697",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "124245c3-d3c9-4190-b471-1b83baaf2dbf",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "ab144378-1d75-4ae6-8b8d-8637e0093a7e",
+			"key": "email",
+			"value": "admin@admin.com"
+		},
+		{
+			"id": "3d430f90-deef-4a47-a48f-9ccb34448c15",
+			"key": "password",
+			"value": "12345678"
+		},
+		{
+			"id": "ebaa2ffb-1b1b-441d-8639-1fd817b04652",
+			"key": "name",
+			"value": "Arthur"
+		},
+		{
+			"id": "00c626aa-106c-4e49-be0f-af830ab4481f",
+			"key": "document",
+			"value": "11111111111"
+		},
+		{
+			"id": "b02418ca-3f9b-4b03-8587-709304bac17b",
+			"key": "business_name",
+			"value": "inteligencia industrial"
+		},
+		{
+			"id": "a5cc3b46-f6fa-42f0-8e05-ad8928ce106c",
+			"key": "phone",
+			"value": "31999999999"
+		},
+		{
+			"id": "11c940c9-f132-445c-b137-1dbc487154d3",
+			"key": "host",
+			"value": "https://inteligencia-industrial-2i.herokuapp.com"
+		},
+		{
+			"id": "8d118165-e99f-4c03-a57b-e0862413682f",
+			"key": "uid",
+			"value": ""
+		},
+		{
+			"id": "71de50d6-37e5-41e5-bbe4-a763d2f989f8",
+			"key": "title",
+			"value": "Gandalf"
+		},
+		{
+			"id": "674d1111-0ddf-4c01-93fb-36c6737e3fb4",
+			"key": "youtube_url",
+			"value": "https://youtu.be/G1IbRujko-A"
+		},
+		{
+			"id": "9cf30f8d-3d21-4936-866c-79d21acdb5e9",
+			"key": "date",
+			"value": "2020-01-01"
+		},
+		{
+			"id": "ec1fdc4c-22b7-487b-bc99-68b52b6bd041",
+			"key": "subcategory_id",
+			"value": "11"
+		},
+		{
+			"id": "0f7a14b1-6768-4cf8-b409-b1ffd379d173",
+			"key": "video_id",
+			"value": ""
+		},
+		{
+			"id": "d98f90ac-4751-4c24-b32f-40bf2749675a",
+			"key": "video_category_id",
+			"value": ""
+		},
+		{
+			"id": "9c450732-6b05-4fd4-ac3b-c83a2e423ff9",
+			"key": "symbol_id",
+			"value": ""
+		},
+		{
+			"id": "a6b18489-8439-43f9-8ec1-473181b23b04",
+			"key": "forum_id",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}

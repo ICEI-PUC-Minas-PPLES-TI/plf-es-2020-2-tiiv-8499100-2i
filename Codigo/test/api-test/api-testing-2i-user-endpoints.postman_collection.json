@@ -1,0 +1,485 @@
+{
+	"info": {
+		"_postman_id": "e5c750c2-540f-80f6-a543-0c711f19a4d0",
+		"name": "api-testing-2i-user-endpoints",
+		"description": "Api testing for 2i inteligencia industrial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "failPostUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fb7232e6-f14f-40fc-a50a-efc160e55903",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "{{email}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"type": "text"
+						},
+						{
+							"key": "document",
+							"value": "{{document}}",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "{{phone}}",
+							"type": "text"
+						},
+						{
+							"key": "business_name",
+							"value": "{{business_name}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/user",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "successPostUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea2d1b06-9aa4-4412-a6b0-22156e6030f1",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "{{$randomEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "{{$randomFirstName}}",
+							"type": "text"
+						},
+						{
+							"key": "document",
+							"value": "{{document}}",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "{{phone}}",
+							"type": "text"
+						},
+						{
+							"key": "business_name",
+							"value": "{{business_name}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/user",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "successPutUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8b24734d-1199-4d26-bc07-7def1b344539",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/user',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var uid = res.json()[0].uid;",
+							"    pm.collectionVariables.set(\"uid\", uid);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "668ac2bf-6f27-4adc-9e6d-afc75109d8c6",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "name",
+						"value": "{{$randomFileName}}",
+						"type": "text"
+					},
+					{
+						"key": "document",
+						"value": "{{document}}",
+						"type": "text"
+					},
+					{
+						"key": "phone",
+						"value": "{{phone}}",
+						"type": "text"
+					},
+					{
+						"key": "business_name",
+						"value": "{{business_name}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "{{$randomEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "{{$randomFirstName}}",
+							"type": "text"
+						},
+						{
+							"key": "document",
+							"value": "{{document}}",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "{{phone}}",
+							"type": "text"
+						},
+						{
+							"key": "business_name",
+							"value": "{{business_name}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/user/{{uid}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"{{uid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "successGetAllUsers",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0f60f707-2712-46aa-91b8-02e906706af2",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cddc501-df4c-4f98-ab88-24856daaad54",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/user",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessGetSpecificUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e6e859c9-9170-4800-b52e-549ba2fdbba6",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/user',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var uid = res.json()[0].uid;",
+							"    pm.collectionVariables.set(\"uid\", uid);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "4c7ccd53-0ce2-4280-8280-480fd3900666",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/user/{{uid}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"{{uid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessDeleteUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "88a20454-d553-4572-b38a-566d08ed58c2",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/user',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var uid = res.json()[0].uid;",
+							"    pm.collectionVariables.set(\"uid\", uid);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "eaa64be0-5c46-4283-94a3-cd9a990124a6",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/user/{{uid}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"{{uid}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3d9740b2-c28b-4c88-b8ff-683a3a69495b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "7da0edc6-6fbb-4bb7-8acd-cbb7d59d2c4f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "1814b4ef-3c1f-4f5e-a220-9c0219d20a9f",
+			"key": "email",
+			"value": "admin@admin.com"
+		},
+		{
+			"id": "4328a7fe-c752-4137-bdcd-67832f38c803",
+			"key": "password",
+			"value": "12345678"
+		},
+		{
+			"id": "9d6a3cc0-5566-41cb-9a7c-089d2372a191",
+			"key": "name",
+			"value": "Arthur"
+		},
+		{
+			"id": "e5ca59d9-23fe-4381-ac3e-2a08bac0ad9e",
+			"key": "document",
+			"value": "11111111111"
+		},
+		{
+			"id": "14442b4b-2499-4fb4-a85a-2573c8de03ca",
+			"key": "business_name",
+			"value": "inteligencia industrial"
+		},
+		{
+			"id": "2cf221c7-db9c-4a43-ae92-15c4b60d9e96",
+			"key": "phone",
+			"value": "31999999999"
+		},
+		{
+			"id": "e4340ce9-c787-49d6-a94f-7ad256567b78",
+			"key": "host",
+			"value": "https://inteligencia-industrial-2i.herokuapp.com"
+		},
+		{
+			"id": "9e275f43-a725-478d-97e0-f06ff6ee37b1",
+			"key": "uid",
+			"value": ""
+		},
+		{
+			"id": "cfe7ebd6-91ba-4183-a712-e3d71e2793e9",
+			"key": "title",
+			"value": "Gandalf"
+		},
+		{
+			"id": "8fea019d-a279-4abb-83f4-87ab6a329638",
+			"key": "youtube_url",
+			"value": "https://youtu.be/G1IbRujko-A"
+		},
+		{
+			"id": "540ebe15-d4b4-415c-9e30-c7fe5622e8ac",
+			"key": "date",
+			"value": "2020-01-01"
+		},
+		{
+			"id": "9c7d1ae2-9ef2-46a5-a730-56b56dd676e0",
+			"key": "subcategory_id",
+			"value": "11"
+		},
+		{
+			"id": "464da128-67de-4550-a854-e6d6374ff5f3",
+			"key": "video_id",
+			"value": ""
+		},
+		{
+			"id": "e1604c09-72fa-409f-9b5b-73f62fc44e8a",
+			"key": "video_category_id",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}

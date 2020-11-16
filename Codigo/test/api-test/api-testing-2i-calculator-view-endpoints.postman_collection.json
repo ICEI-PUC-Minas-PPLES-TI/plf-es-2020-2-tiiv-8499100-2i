@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "6c0d8f88-1a6c-4c8d-abcb-cf879d602b03",
+		"name": "api-testing-2i-calculator-view-endpoints",
+		"description": "Api testing for 2i inteligencia industrial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "successPostCalculatorView",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4121bafd-68f9-4036-a611-6f25bc43944c",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "996b70a0-469d-4432-a1d9-ac78c2067257",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/user',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var uid = res.json()[0].uid;",
+							"    pm.collectionVariables.set(\"uid\", uid);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "{{uid}}",
+							"type": "text"
+						},
+						{
+							"key": "calculator_type",
+							"value": "{{calculator_type}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/calculator_view",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"calculator_view"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "successGetAllCalculatorView",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "66f3575f-36ef-4e4f-906a-2e4e79c36315",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "177532da-446d-49a9-a94c-158d2f8e4e0d",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/calculator_view",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"calculator_view"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessGetCalculatorViewFilter",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "29de9c6e-9c58-4011-a74f-a89d860530ec",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "71db7b63-1705-4637-93f6-1145c8dac78c",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/calculator_view/filter",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"calculator_view",
+						"filter"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "730a2bff-a4eb-43ee-b608-56b2282aa533",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b450c4d2-8909-4cf5-9562-b6a27a8a4300",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "0705810f-ddfb-4665-bd1e-5adca1a5b073",
+			"key": "email",
+			"value": "admin@admin.com"
+		},
+		{
+			"id": "430420f5-42f6-4415-85c2-db64567aae99",
+			"key": "password",
+			"value": "12345678"
+		},
+		{
+			"id": "894fc403-4393-41af-8e8d-62918a0e9a27",
+			"key": "name",
+			"value": "Arthur"
+		},
+		{
+			"id": "d579ac4b-6094-43d3-8eff-c087d6a59ce0",
+			"key": "document",
+			"value": "11111111111"
+		},
+		{
+			"id": "068e18bb-9709-4696-b28e-0297dc14dbaa",
+			"key": "business_name",
+			"value": "inteligencia industrial"
+		},
+		{
+			"id": "8c371328-ef40-4de8-9d5d-15bbbb99fc95",
+			"key": "phone",
+			"value": "31999999999"
+		},
+		{
+			"id": "8d8a8563-f8ee-46a1-b1f5-23ec90b5734f",
+			"key": "host",
+			"value": "https://inteligencia-industrial-2i.herokuapp.com"
+		},
+		{
+			"id": "691a9663-aa83-4cf1-9d1f-35d8e91df5d5",
+			"key": "uid",
+			"value": ""
+		},
+		{
+			"id": "397be5e0-5587-45ac-a6ba-38447e5dea35",
+			"key": "title",
+			"value": "Gandalf"
+		},
+		{
+			"id": "385f022d-0f27-433b-80a6-734b7df971b3",
+			"key": "youtube_url",
+			"value": "https://youtu.be/G1IbRujko-A"
+		},
+		{
+			"id": "dd807064-5313-41d7-a87b-8a054d742e12",
+			"key": "date",
+			"value": "2020-01-01"
+		},
+		{
+			"id": "44511f8f-f661-43af-91c2-eb21474ccfa8",
+			"key": "subcategory_id",
+			"value": "11"
+		},
+		{
+			"id": "6824159a-6601-4fd2-8215-e1d652c2399b",
+			"key": "video_id",
+			"value": ""
+		},
+		{
+			"id": "8693c57c-5040-49f2-a822-e22e4244a74d",
+			"key": "video_category_id",
+			"value": ""
+		},
+		{
+			"id": "230b0cfb-7db7-43e9-8d22-c9370eebe593",
+			"key": "post_id",
+			"value": ""
+		},
+		{
+			"id": "beff04e0-b744-4b91-b5a0-a891eaec2cbe",
+			"key": "calculator_type",
+			"value": "ISO"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "5dc76a93-e22c-4cb7-9b21-5435d2b0e6fa",
+		"name": "api-testing-2i-symbol-category-endpoints",
+		"description": "Api testing for 2i inteligencia industrial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "sucessPostSymbolCategory",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8d2e65f5-3a4a-49e9-9f9a-c3e93520ff01",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "88d6807c-3250-4dea-ad41-c4494064cc31",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "{{$randomCity}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/symbol_category",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"symbol_category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessGetAllSymbolCategory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0e62caa-7541-49e2-9b31-133bc95930c1",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/symbol_category",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"symbol_category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessGetSpecificSymbolCategory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cccde115-20a8-4802-9965-321e29ed63f8",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "7807081b-5fbd-453e-8d60-415122012c59",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/symbol_category',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var symbol_category_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"symbol_category_id\", symbol_category_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/video_category/{{symbol_category_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"video_category",
+						"{{symbol_category_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessPutSymbolCategory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0a1d3370-d08e-4d2e-97fb-459fb967ab12",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4dc31d07-dfe0-4f0c-b1bb-4c6757585078",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/symbol_category',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var symbol_category_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"symbol_category_id\", symbol_category_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "{{$randomFirstName}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/symbol_category/{{symbol_category_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"symbol_category",
+						"{{symbol_category_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessDeleteSymbolCategory",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1ad947ea-990f-4bb5-a1bf-fc2f39cd3ab3",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/symbol_category',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var symbol_category_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"symbol_category_id\", symbol_category_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e1c91996-11b7-4194-931e-7135432fcd12",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{host}}/symbol_category/{{symbol_category_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"symbol_category",
+						"{{symbol_category_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d66867e2-c994-4ec7-a8fa-3037a1e4a5eb",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6576b438-8c8d-4a98-a99e-5e8dda33b869",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "294efac1-4278-409a-ad61-ad26cf49dd10",
+			"key": "email",
+			"value": "admin@admin.com"
+		},
+		{
+			"id": "873230b8-d9c0-4934-b665-ec712ca9a957",
+			"key": "password",
+			"value": "12345678"
+		},
+		{
+			"id": "faaa8392-8015-451b-9dae-21368de3c025",
+			"key": "name",
+			"value": "Arthur"
+		},
+		{
+			"id": "0ac6bb12-aceb-480b-999b-5b9327cdc763",
+			"key": "document",
+			"value": "11111111111"
+		},
+		{
+			"id": "da8b567e-4184-44d0-98e8-d43cdb9418b2",
+			"key": "business_name",
+			"value": "inteligencia industrial"
+		},
+		{
+			"id": "1e04e86f-8127-475f-be9e-de2f531e1018",
+			"key": "phone",
+			"value": "31999999999"
+		},
+		{
+			"id": "a3cf7c8f-81fd-4cde-925e-045d088e670e",
+			"key": "host",
+			"value": "https://inteligencia-industrial-2i.herokuapp.com"
+		},
+		{
+			"id": "93e04dc3-0d8e-47f4-8dff-594eec33ee9f",
+			"key": "uid",
+			"value": ""
+		},
+		{
+			"id": "5aaab7f5-8a42-4ea6-a14c-125c9437350d",
+			"key": "title",
+			"value": "Gandalf"
+		},
+		{
+			"id": "bf95607b-e6d1-488c-bfdb-733b29e1ece7",
+			"key": "youtube_url",
+			"value": "https://youtu.be/G1IbRujko-A"
+		},
+		{
+			"id": "2c2c1524-6f83-45da-b299-5db989be4743",
+			"key": "date",
+			"value": "2020-01-01"
+		},
+		{
+			"id": "96dbb49a-1618-46f8-9a16-b40bbebfcd88",
+			"key": "subcategory_id",
+			"value": "11"
+		},
+		{
+			"id": "ab07f61f-f224-4c77-9baf-7cec998fb708",
+			"key": "video_id",
+			"value": ""
+		},
+		{
+			"id": "e830d67f-13cd-415b-a851-517907fadc42",
+			"key": "video_category_id",
+			"value": ""
+		},
+		{
+			"id": "6c7bf3f9-75c0-4abc-bade-0ddad686c215",
+			"key": "symbol_category_id",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}

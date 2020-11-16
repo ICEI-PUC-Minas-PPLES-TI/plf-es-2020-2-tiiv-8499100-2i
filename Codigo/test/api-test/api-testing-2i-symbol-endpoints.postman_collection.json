@@ -1,0 +1,462 @@
+{
+	"info": {
+		"_postman_id": "8c3a2d77-d77b-426d-b5c2-ff30c6ff01dc",
+		"name": "api-testing-2i-symbol-endpoints",
+		"description": "Api testing for 2i inteligencia industrial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "successPostSymbol",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c8a5f0a9-c800-4735-a78a-a74496a171b9",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "acb52719-8629-4e52-b6cb-de82a86dd8f0",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/symbol_subcategory',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var symbol_subcategory_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"symbol_subcategory_id\", symbol_subcategory_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "{{title}}",
+							"type": "text"
+						},
+						{
+							"key": "body",
+							"value": "{{$randomFirstName}}",
+							"type": "text"
+						},
+						{
+							"key": "img",
+							"value": "{{$randomImageUrl}}",
+							"type": "text"
+						},
+						{
+							"key": "subcategory_id",
+							"value": "{{symbol_subcategory_id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/symbol",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"symbol"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessGetAllSymbol",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ef84b39a-2f91-448c-bf33-2d1b20e34ed4",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/symbol",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"symbol"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessGetSymbolsByCategory",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b4cea4a7-c0c9-4223-8422-3f02f73bbfbd",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/symbol_category',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var symbol_category_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"symbol_category_id\", symbol_category_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "452fd457-bb4c-4c81-bd78-0d62493f7e54",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{host}}/symbol/category/{{symbol_category_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"symbol",
+						"category",
+						"{{symbol_category_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessGetSpecificSymbol",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "dfb07d9c-3159-473d-b0f7-ca241536883c",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/symbol',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var symbol_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"symbol_id\", symbol_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "fe318fb0-a8f9-4b80-9721-e43a7018ed2c",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/symbol/{{symbol_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"symbol",
+						"{{symbol_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessPutSymbol",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "175159a5-1f27-4475-a25c-e394f333b1e4",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/symbol',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var symbol_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"symbol_id\", symbol_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8656f3ca-9e8e-48d7-a6a1-623f1d8520b1",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "{{$randomCountry}}",
+							"type": "text"
+						},
+						{
+							"key": "body",
+							"value": "{{$randomFirstName}}",
+							"type": "text"
+						},
+						{
+							"key": "img",
+							"value": "{{$randomImageUrl}}",
+							"type": "text"
+						},
+						{
+							"key": "subcategory_id",
+							"value": "{{symbol_subcategory_id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/symbol/{{symbol_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"symbol",
+						"{{symbol_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucessDeleteSymbol",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cd13b0b2-8257-4b7b-8e48-7aa6ac693488",
+						"exec": [
+							"const reqObject = {",
+							"  url: 'https://inteligencia-industrial-2i.herokuapp.com/symbol',",
+							"  method: 'GET'",
+							"};",
+							"",
+							"pm.sendRequest(reqObject, (err, res) => {",
+							"    var symbol_id = res.json()[0].id;",
+							"    pm.collectionVariables.set(\"symbol_id\", symbol_id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b9322ef-8d77-4349-9762-ed2bb560dc80",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{host}}/symbol/{{symbol_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"symbol",
+						"{{symbol_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "5ea80ae1-1add-4884-9b1f-196d30024434",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "0e9de86e-0d7f-4d56-843e-e971f6bcbe64",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "0752e99a-e463-4bc2-8af0-3632afd81a4f",
+			"key": "email",
+			"value": "admin@admin.com"
+		},
+		{
+			"id": "65c68eb8-df5f-412b-9941-5f05d63ebf04",
+			"key": "password",
+			"value": "12345678"
+		},
+		{
+			"id": "f7a2ac95-c5e7-4ecc-a470-f0e46615f9a8",
+			"key": "name",
+			"value": "Arthur"
+		},
+		{
+			"id": "34379a4f-85ac-41d1-85c1-ceb35af34cce",
+			"key": "document",
+			"value": "11111111111"
+		},
+		{
+			"id": "3a4ec220-997d-4eca-9702-ea8fbb506a43",
+			"key": "business_name",
+			"value": "inteligencia industrial"
+		},
+		{
+			"id": "567b4d22-5fcd-4c6e-8e9e-8389d599f905",
+			"key": "phone",
+			"value": "31999999999"
+		},
+		{
+			"id": "3bf615e2-ac05-4012-ae61-036e58ef19da",
+			"key": "host",
+			"value": "https://inteligencia-industrial-2i.herokuapp.com"
+		},
+		{
+			"id": "5ccd5037-6ee8-4390-9f1c-e5215c112462",
+			"key": "uid",
+			"value": ""
+		},
+		{
+			"id": "db51f62c-9dfe-437e-8c42-eda184a43e05",
+			"key": "title",
+			"value": "Gandalf"
+		},
+		{
+			"id": "ed21f3a3-e8ac-416a-904e-3fb3db563420",
+			"key": "youtube_url",
+			"value": "https://youtu.be/G1IbRujko-A"
+		},
+		{
+			"id": "e9cb873c-adfa-420f-847d-68730adfd5d4",
+			"key": "date",
+			"value": "2020-01-01"
+		},
+		{
+			"id": "7e965e13-9b3f-4fbd-b231-47cf17ad8d3f",
+			"key": "subcategory_id",
+			"value": "11"
+		},
+		{
+			"id": "414b0ffb-093e-484c-940d-6c219f6a70f9",
+			"key": "video_id",
+			"value": ""
+		},
+		{
+			"id": "ce9774aa-0d9d-4ab2-a66b-bc5b27c02ac4",
+			"key": "video_category_id",
+			"value": ""
+		},
+		{
+			"id": "df079d38-a4cb-4343-a948-4857daf8b4e3",
+			"key": "symbol_subcategory_id",
+			"value": ""
+		},
+		{
+			"id": "45404c99-7bd4-4a00-a783-320ebadd39a0",
+			"key": "symbol_category_id",
+			"value": ""
+		},
+		{
+			"id": "9eb6a1e0-14de-4fa9-a23a-df2ce7bde6d2",
+			"key": "symbol_id",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
